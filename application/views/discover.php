@@ -1,7 +1,6 @@
 <style>
 	.zoeken {
 		text-align: center;
-		position:relative
 	}
 </style>
 <div class="zoeken">

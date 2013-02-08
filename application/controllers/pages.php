@@ -28,7 +28,15 @@ class Pages extends CI_Controller {
 	}
 	
 	public function home(){
-		$this->load->view('header');
+		
+		$this -> load -> library('googlemaps');
+
+		$config['center'] = '37.4419, -122.1419';
+		$config['map_height'] = '200px';
+		$this -> googlemaps -> initialize($config);		
+
+		$data['map'] = $this -> googlemaps -> create_map();
+		$this->load->view('header', $data);
 		$this->load->view('home');
 		$this->load->view('footer');
 		

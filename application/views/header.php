@@ -55,6 +55,9 @@
 			.input-append button.add-on {
     			height: inherit !important;
 			}
+			.container #map_canvas {
+				margin-bottom:8px;
+			}
 		</style>
 	</head>
 	<body>
@@ -87,3 +90,4 @@
 
 			</div>
 		</div>
+<?php if(isset($map)){ echo $map['js'].'<div class="container">'. $map['html'] .'</div>'; } ?>

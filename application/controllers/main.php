@@ -21,6 +21,8 @@ class Main extends CI_Controller {
 	}
 
 	public function index(){
+	
+	//Test
 		// Try to get the user's id on Facebook
 		$userId = $this->facebook->getUser();
 		// If user is not yet authenticated, the id will be zero

@@ -52,6 +52,9 @@
 			#map_canvas {
 				box-shadow: 0px 0px 3px #666;
 			}
+			.input-append button.add-on {
+    			height: inherit !important;
+			}
 		</style>
 	</head>
 	<body>

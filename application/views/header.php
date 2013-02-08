@@ -50,10 +50,7 @@
 				box-shadow: 0px 0px 5px #ccc;
 			}
 			#map_canvas {
-				
-				height:250px !important;
-				box-shadow: 0px 0px 3px #666;			
-				
+				box-shadow: 0px 0px 3px #666;
 			}
 		</style>
 	</head>

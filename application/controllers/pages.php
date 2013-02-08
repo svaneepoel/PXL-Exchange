@@ -26,5 +26,12 @@ class Pages extends CI_Controller {
 		$this -> load -> view('maps', $data);
 		$this -> load -> view('footer');
 	}
+	
+	public function home(){
+		$this->load->view('header');
+		$this->load->view('home');
+		$this->load->view('footer');
+		
+	}
 
 }

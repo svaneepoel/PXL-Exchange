@@ -20,9 +20,6 @@ class Main extends CI_Controller {
 		session_destroy();
 	}
 	
-	public function login(){
-	}
-
 	public function index(){
 	
 	//Test

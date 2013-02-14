@@ -7,6 +7,8 @@
 	
 	echo form_open('login/login_validation');
 	
+	echo validation_errors();
+	
 	echo "<p>Email: ";
 	echo form_input('email');
 	echo "</p>";

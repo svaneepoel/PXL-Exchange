@@ -26,7 +26,6 @@ echo form_open($base_url.'registration');
 		);
 		
 ?>
-<!-- Hallo ik ben Lucas! -->
 <ul> 
 	<li>
 	<label> Naam </label> 

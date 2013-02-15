@@ -10,7 +10,7 @@
 	echo validation_errors();
 	
 	echo "<p>Email: ";
-	echo form_input('email');
+	echo form_input('email', $this->input->post('email'));
 	echo "</p>";
 	
 	echo "<p>Password ";
@@ -26,5 +26,7 @@
 	echo form_close();
 	
 	?>
+	
+	<a href='<?php echo base_url()."login/signup"; ?>'>Sign Up</a>
 
 </div>

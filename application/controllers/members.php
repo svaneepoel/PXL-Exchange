@@ -10,6 +10,8 @@ class Members extends CI_Controller {
 		$this->load->view('members');
 		$this->load->view('footer');
 	}
+	
+	
 }
 
 ?>

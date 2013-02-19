@@ -104,6 +104,23 @@ class Login extends CI_Controller {
 		$this->session->sess_destroy();
 		redirect('login/login');
 		}
+		
+	public function register_user($key){
+		$this->load->model('model_users');
+		
+		if($this->model_users->is_valid_key($key)){
+			if ($newemail = $this->model_users->add_user($key)){
+			
+			$date = array(
+				'email' => $newemail, 
+				'is_logged_in' => 1
+				);
+				$this->session->set_userdata($data);
+				redirect('login/members');
+			} else {
+				echo "failed to add user, please try again";
+				}
+		} else echo "invalid key";
+	}
 }
-
 

@@ -111,7 +111,7 @@ class Login extends CI_Controller {
 		if($this->model_users->is_valid_key($key)){
 			if ($newemail = $this->model_users->add_user($key)){
 			
-			$date = array(
+			$data = array(
 				'email' => $newemail, 
 				'is_logged_in' => 1
 				);

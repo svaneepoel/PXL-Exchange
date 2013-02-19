@@ -91,3 +91,12 @@
 			</div>
 		</div>
 <?php if(isset($map)){ echo $map['js'].'<div class="container">'. $map['html'] .'</div>'; } ?>
+<?php 
+if(!isset($home)){
+	echo '<div class="container">
+
+
+	<div class="well clearfix" style="background:white; margin-top:0px;">';
+}
+
+?>

@@ -1,7 +1,4 @@
-<div class="container">
 
-
-	<div class="well" style="background:white; margin-top:0px;">
 		
 			<div style="text-align:center;">
 		<div class='input-append' style="height:50px;">
@@ -13,5 +10,5 @@
 	</div>	
 		
 	</div>
-</div>
+
 

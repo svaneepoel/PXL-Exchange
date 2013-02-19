@@ -63,17 +63,18 @@ class Login extends CI_Controller {
 		$key=md5(uniqid());
 		
 		$this->load->library('email', array('mailtype'=>'html'));
-		$this->Load->model('model_users');
+		$this->load->model('model_users');
 		
 		$this->email->from('signup@phl.be', "PHL Exchange");
-		$this->email->to($this->input->post('email'));
+		//$this->email->to($this->input->post('email'));
+		$this->email->to('admin@phl.be');
 		$this->email->subject('Confirm your account at PHL Exchange');
 		
 		$message = "<p> Thank you for signing up. </p>";
 		$message .= "<p><a href='".base_url()."login/register_user/$key' > Click Here </a> to confirm your account</p>";
 		
 		$this->email->message($message);
-		if($this->model_users->add_temp_user($key)){
+		if($this->model_users->add_temp_users($key)){
 			if($this->email->send()){
 				echo "The email has been sent";
 				} else echo "The email failed";

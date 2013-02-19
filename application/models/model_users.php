@@ -18,7 +18,6 @@
 		}
 		
 		public function add_temp_users($key){
-		
 			$data = array(
 				'email' => $this->input->post('email'),
 				'password' => md5($this->input->post('password')),

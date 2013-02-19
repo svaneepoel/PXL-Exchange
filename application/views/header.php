@@ -71,19 +71,19 @@
 				<div style="float:right; margin-top:30px;">
 					<ul class="menu">
 						<li class="active">
-							<a href="" class="btn"><i class="icon icon-home icon-large"></i>Home</a>
+							<a href="<?php echo base_url(); ?>main/home" class="btn"><i class="icon icon-home icon-large"></i>Home</a>
 						</li>
 						<li>
-							<a href="" class="btn"><i class="icon icon-globe icon-large"></i>Discover</a>
+							<a href="<?php echo base_url(); ?>discover/view" class="btn"><i class="icon icon-globe icon-large"></i>Discover</a>
 						</li>
 						<li>
-							<a href="" class="btn"><i class="icon icon-search icon-large"></i>Search</a>
+							<a href="<?php echo base_url(); ?>" class="btn"><i class="icon icon-search icon-large"></i>Search</a>
 						</li>
 						<li>
-							<a href="" class="btn"><i class="icon icon-book-open icon-large"></i>Info</a>
+							<a href="<?php echo base_url(); ?>about/view" class="btn"><i class="icon icon-book-open icon-large"></i>Info</a>
 						</li>
 						<li>
-							<a href="" class="btn"><i class="icon icon-user icon-large"></i>User</a>
+							<a href="<?php echo base_url(); ?>" class="btn"><i class="icon icon-user icon-large"></i>User</a>
 						</li>
 					</ul>
 				</div>
@@ -92,10 +92,8 @@
 		</div>
 <?php if(isset($map)){ echo $map['js'].'<div class="container">'. $map['html'] .'</div>'; } ?>
 <?php 
-if(!isset($home)){
+if(!isset($no_div)){
 	echo '<div class="container">
-
-
 	<div class="well clearfix" style="background:white; margin-top:0px;">';
 }
 

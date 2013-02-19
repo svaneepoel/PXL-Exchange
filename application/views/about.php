@@ -1,7 +1,3 @@
-<div class="container">
-
-	<div class="well" style="background:white; margin-top:0px;">
-
 		<div style="text-align:center;">
 			<div class='input-append' style="height:50px;">
 				<div class="page-header">
@@ -38,10 +34,10 @@
 				<div class="control-group">
 
 					<!-- Text input-->
-					<label class="control-label" for="input01">Volledige naam</label>
+					<label class="control-label" for="input01">Full Name</label>
 					<div class="controls">
 						
-						<input  value="<?php echo set_value('name'); ?>" name="naam" type="text" placeholder="Jan Janssen" class="input-xlarge span5">
+						<input  value="<?php echo set_value('name'); ?>" name="naam" type="text" placeholder="John Doe" class="input-xlarge span5">
 						<?php echo form_error('name'); ?><p class="help-block"></p>
 					</div>
 				</div>
@@ -94,6 +90,3 @@
 
 			</fieldset>
 		</form>
-	</div>
-</div>
-

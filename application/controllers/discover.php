@@ -39,9 +39,9 @@ class Discover extends CI_Controller {
 		
 
 		$data['map'] = $this -> googlemaps -> create_map();
-		$this -> load -> view('header');
+		$this -> load -> view('header', array('no_div'=>true));
 		$this -> load -> view('discover', $data);
-		$this -> load -> view('footer');
+		$this -> load -> view('footer', array('no_div'=>true));
 
 	}
 	
@@ -66,9 +66,9 @@ class Discover extends CI_Controller {
 		}
 		// END MARKERS
 		$data['map'] = $this -> googlemaps -> create_map();
-		$this -> load -> view('header');
+		$this -> load -> view('header', array('no_div'=>true));
 		$this -> load -> view('discover', $data);
-		$this -> load -> view('footer');
+		$this -> load -> view('footer',array('no_div'=>true));
 		}
 
 }

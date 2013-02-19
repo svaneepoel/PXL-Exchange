@@ -28,7 +28,7 @@ class Discover extends CI_Controller {
 
 		$this -> load -> library('googlemaps');
 
-		$config['center'] = $this -> input -> post("test"); ;
+		$config['center'] = $this -> input -> post("test");
 		$config['zoom'] = 'auto';
 		$config['cluster'] = TRUE;
 		$config['places'] = TRUE;

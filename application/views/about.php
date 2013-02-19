@@ -26,7 +26,9 @@
 				Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 			</p>
 		</blockquote>
-		<form class="form-horizontal" action="view" method="post">
+		
+		<!--form class="form-horizontal" action="view" method="post"-->
+			<?php echo form_open('form'); ?>
 			<fieldset>
 				<div id="legend" class="">
 					<legend class="">
@@ -38,8 +40,9 @@
 					<!-- Text input-->
 					<label class="control-label" for="input01">Volledige naam</label>
 					<div class="controls">
-						<input name="naam" type="text" placeholder="Jan Janssen" class="input-xlarge span5">
-						<p class="help-block"></p>
+						
+						<input  value="<?php echo set_value('name'); ?>" name="naam" type="text" placeholder="Jan Janssen" class="input-xlarge span5">
+						<?php echo form_error('name'); ?><p class="help-block"></p>
 					</div>
 				</div>
 
@@ -48,8 +51,9 @@
 					<!-- Text input-->
 					<label class="control-label" for="input01">Email</label>
 					<div class="controls">
-						<input name="emailadres" type="text" placeholder="me@example.com" class="input-xlarge span5">
-						<p class="help-block">
+						
+						<input  value="<?php echo set_value('email'); ?>" name="emailadres" type="text" placeholder="me@example.com" class="input-xlarge span5">
+						<?php echo form_error('email'); ?><p class="help-block">
 							We would like to contact you back!
 						</p>
 					</div>
@@ -61,8 +65,9 @@
 					<label class="control-label">Message</label>
 					<div class="controls">
 						<div class="textarea">
-							<textarea name="bericht" type="" class="span5" style="resize: vertical;"> </textarea>
-						</div>
+							
+							<textarea  value="<?php echo set_value('message'); ?>" name="bericht" type="" class="span5" style="resize: vertical;"> </textarea>
+						<?php echo form_error('message'); ?></div>
 					</div>
 				</div>
 

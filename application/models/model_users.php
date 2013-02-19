@@ -62,10 +62,10 @@
 					$did_add_user = $this->db->insert('users', $data);
 			}
 			
-			if ($did_add_users){
+			if ($did_add_user){
 				$this->db->where('key',$key);
 				$this->db->delete('temp_users');
-				return $date['email'];
+				return $data['email'];
 			} else {
 				return false;
 				}

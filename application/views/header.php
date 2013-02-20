@@ -53,12 +53,13 @@
 				box-shadow: 0px 0px 3px #666;
 			}
 			.input-append button.add-on {
-    			height: inherit !important;
+				height: inherit !important;
 			}
 			.container #map_canvas {
-				margin-bottom:8px;
+				margin-bottom: 8px;
 			}
 		</style>
+		
 	</head>
 	<body>
 
@@ -83,18 +84,38 @@
 							<a href="<?php echo base_url(); ?>about/view" class="btn"><i class="icon icon-book-open icon-large"></i>Info</a>
 						</li>
 						<li>
-							<a href="<?php echo base_url(); ?>" class="btn"><i class="icon icon-user icon-large"></i>User</a>
-						</li>
+							<div class="btn-group">
+								<a href="<?php echo base_url(); ?>" class="btn dropdown-toggle" data-toggle="dropdown"><i class="icon icon-user icon-large"></i>User</a>
+
+								<ul class="dropdown-menu" style="padding: 10px;">
+									<form>
+										<fieldset>
+											<legend>
+												Login
+											</legend>
+											<input type="text" placeholder="Username"><br/>
+											<input type="password" placeholder="Password"><br/>
+											<button type="submit" class="btn btn-success">
+												Login
+											</button><br/><hr>
+											<img class="facebook" width="220" src="<?php echo base_url(); ?>assets/img/facebook.png" alt="fb_login"
+										</fieldset>
+									</form>
+								</ul>
+							</div>
+
 					</ul>
 				</div>
 
 			</div>
 		</div>
-<?php if(isset($map)){ echo $map['js'].'<div class="container">'. $map['html'] .'</div>'; } ?>
-<?php 
-if(!isset($no_div)){
-	echo '<div class="container">
-	<div class="well clearfix" style="background:white; margin-top:0px;">';
-}
-
-?>
+		<?php
+		if (isset($map)) { echo $map['js'] . '<div class="container">' . $map['html'] . '</div>';
+		}
+		?>
+		<?php
+		if (!isset($no_div)) {
+			echo '<div class="container">
+<div class="well clearfix" style="background:white; margin-top:0px;">';
+		}
+		?>

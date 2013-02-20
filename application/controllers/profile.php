@@ -16,9 +16,11 @@ class Profile extends CI_Controller {
 		}
 		
 		$details = $this->model_users->get_user_details($uid);
+		$user = $this->model_users->get_user($uid);
+		$internship = $this->model_users->get_internship($uid);
 		
 		$this -> load -> view('header');
-		$this->load->view('profile', array('blog'=>$html, 'details'=>$details));
+		$this->load->view('profile', array('blog'=>$html, 'details'=>$details, 'user'=>$user, 'internship' => $internship));
 		$this -> load -> view('footer');
 
 	}

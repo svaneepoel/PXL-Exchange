@@ -76,5 +76,13 @@ Class Model_users extends CI_Model {
 	public function get_user_details($uid){
 		return $this->db->where('user_id', $uid)->get('user_details')->row();
 	}
+	
+	public function get_user($uid){
+		return $this->db->where('id', $uid)->get('users')->row();
+	}
+	
+	public function get_internship($uid){
+		return $this->db->where('user_id', $uid)->get('user_internships')->row();
+	}
 
 }

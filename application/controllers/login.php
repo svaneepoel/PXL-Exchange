@@ -54,7 +54,6 @@ class Login extends CI_Controller {
 	$this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[users.email]');
 	$this->form_validation->set_rules('password', 'Password', 'required|trim');
 	$this->form_validation->set_rules('cpassword', 'Confirm Password', 'required|trim|matches[password]');
-	
 	$this->form_validation->set_message('is_unique', "That email address already exists.");
 	
 	if ($this->form_validation->run()){
@@ -76,7 +75,7 @@ class Login extends CI_Controller {
 		$this->email->message($message);
 		if($this->model_users->add_temp_users($key)){
 			if($this->email->send()){
-				echo "The email has been sent";
+				echo "The email has been sent. Please wait a few hours until the admin accepted you. DO NOT SIGN UP AGAIN!!!";
 				} else echo "The email failed";
 			} else echo "User not added to database";
 			

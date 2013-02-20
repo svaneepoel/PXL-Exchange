@@ -18,7 +18,12 @@ Class Model_users extends CI_Model {
 	}
 
 	public function add_temp_users($key) {
-		$data = array('email' => $this -> input -> post('email'), 'password' => md5($this -> input -> post('password')), 'key' => $key);
+		$data = array(	'anaam' => $this -> input -> post('anaam'),
+						'vnaam' => $this -> input -> post('vnaam'),
+						'email' => $this -> input -> post('email'), 
+						'password' => md5($this -> input -> post('password')), 
+						'key' => $key
+						);
 
 		$query = $this -> db -> insert('temp_users', $data);
 
@@ -50,7 +55,11 @@ Class Model_users extends CI_Model {
 			$row = $temp_users -> row();
 			//alle values in query zitten in row en zijn op te vragen
 
-			$data = array('email' => $row -> email, 'password' => $row -> password, );
+			$data = array(	'anaam' => $row -> anaam,
+							'vnaam' => $row -> vnaam,
+							'email' => $row -> email, 
+							'password' => $row -> password,
+							);
 
 			$did_add_user = $this -> db -> insert('users', $data);
 		}

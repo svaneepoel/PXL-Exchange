@@ -4,7 +4,7 @@
 	}
 </style>
 <div class="zoeken">
-	<form class="form-search" action="view" method="post">
+	<form class="form-search" action="" method="post">
 		<input name="test" id="myPlaceTextBox" type="text" class="input-medium search-query">
 		<button type="submit" class="btn">
 			Search

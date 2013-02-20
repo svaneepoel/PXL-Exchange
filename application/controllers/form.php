@@ -8,7 +8,7 @@ class Form extends CI_Controller {
 
 		$this -> load -> library('form_validation');
 
-		$this -> form_validation -> set_rules('name', 'Name', 'trim|required|min_length[5]|max_length[12]');
+		$this -> form_validation -> set_rules('name', 'Name', 'trim|required');
 		$this -> form_validation -> set_rules('email', 'Email', 'trim|required|valid_email');
 		$this -> form_validation -> set_rules('message', 'Message', 'required');
 		$this -> form_validation -> set_error_delimiters('<div class="label label-important">', '</div>');

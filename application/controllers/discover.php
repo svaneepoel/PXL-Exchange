@@ -24,12 +24,15 @@ class Discover extends CI_Controller {
 	 $this -> load -> view('footer');
 	 }*/
 
-	public function view($page = 'home') {
-
+	public function index() {
+		$center = $this->input->post("test");
+		if(!$center){
+			$center = 'Belgium';
+		}
+		
 		$this -> load -> library('googlemaps');
-
-		$config['center'] = $this -> input -> post("test");
-		$config['zoom'] = 'auto';
+		$config['center'] = $center;
+		$config['zoom'] = 8;
 		$config['cluster'] = TRUE;
 		$config['places'] = TRUE;
 		$config['placesAutocompleteInputID'] = 'myPlaceTextBox';
@@ -49,7 +52,7 @@ class Discover extends CI_Controller {
 		$this -> load -> library('googlemaps');
 		$config['zoom'] = '3';
 		$config['cluster'] = TRUE;
-		$config['center'] = "belgium";
+		$config['center'] = "Belgium";
 		$this -> googlemaps -> initialize($config);
 		
 		// BEGIN MARKERS - Alle markers uit database halen en toevoegen aan de kaart

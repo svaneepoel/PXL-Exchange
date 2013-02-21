@@ -3,7 +3,10 @@
 class Admin extends CI_Controller {
 
 	public function index() {
-
+		$query = $this -> db -> query('SELECT id, vnaam, anaam, email, is_active FROM `users`');
+		$data['users'] = $query->result_array(); 
+		
+		
 		/*echo "<table class='table .table-striped'>";
 		 $query = $this -> db -> query('SELECT id, vnaam, anaam, email, is_active FROM `users`');
 		 foreach ($query->result_array() as $row) {
@@ -32,7 +35,7 @@ class Admin extends CI_Controller {
 		 }
 
 		 echo "</table>";*/
-		$this -> load -> view('header');
+		
 		$oldpassword = $this -> input -> post("oldpassword");
 		$newpassword = $this -> input -> post("newpassword");
 		$repeatpassword = $this -> input -> post("repeatpassword");
@@ -49,7 +52,8 @@ class Admin extends CI_Controller {
 
 			}
 		}
-		$this -> load -> view('admin');
+		$this -> load -> view('header');
+		$this -> load -> view('admin', $data);
 		$this -> load -> view('footer');
 	}
 

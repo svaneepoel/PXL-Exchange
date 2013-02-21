@@ -24,8 +24,8 @@
 	<div class="tab-pane fade in active" id="approve">
 		<?php
 		echo "<table class='table .table-striped'>";
-		$query = $this -> db -> query('SELECT id, vnaam, anaam, email, is_active FROM `users`');
-		foreach ($query->result_array() as $row) {
+		
+		foreach ($users as $row) {
 			if ($row['is_active'] == 0) {
 				echo "<tr class='error'>";
 			} else {
@@ -42,7 +42,7 @@
 			echo "</td>";
 			if ($row['is_active'] == 0) {
 				echo "<td>";
-				echo "<a class='btn btn-small btn-warning' href='http://localhost/exchange/admin/approve/" . $row['id'] . "'?>Approve!</a>";
+				echo "<a class='btn btn-small btn-warning' href='".base_url()."admin/approve/" . $row['id'] . "'?>Approve!</a>";
 				echo "</td>";
 			} else {
 				echo "<td>Reeds toegevoegd</td>";

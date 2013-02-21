@@ -24,7 +24,7 @@
 		</blockquote>
 		
 		<!--form class="form-horizontal" action="view" method="post"-->
-			<?php echo form_open('form'); ?>
+			<?php echo form_open('pages/about', array('class' => 'form-horizontal', 'method' => 'post')); ?>
 			<fieldset>
 				<div id="legend" class="">
 					<legend class="">
@@ -36,8 +36,7 @@
 					<!-- Text input-->
 					<label class="control-label" for="input01">Full Name</label>
 					<div class="controls">
-						
-						<input  value="<?php echo set_value('name'); ?>" name="naam" type="text" placeholder="John Doe" class="input-xlarge span5">
+						<input  value="<?php echo set_value('name'); ?>" name="name" type="text" placeholder="John Doe" class="input-xlarge span5">
 						<?php echo form_error('name'); ?><p class="help-block"></p>
 					</div>
 				</div>
@@ -48,7 +47,7 @@
 					<label class="control-label" for="input01">Email</label>
 					<div class="controls">
 						
-						<input  value="<?php echo set_value('email'); ?>" name="emailadres" type="text" placeholder="me@example.com" class="input-xlarge span5">
+						<input  value="<?php echo set_value('email'); ?>" name="email" type="text" placeholder="me@example.com" class="input-xlarge span5">
 						<?php echo form_error('email'); ?><p class="help-block">
 							We would like to contact you back!
 						</p>
@@ -62,7 +61,7 @@
 					<div class="controls">
 						<div class="textarea">
 							
-							<textarea  value="<?php echo set_value('message'); ?>" name="bericht" type="" class="span5" style="resize: vertical;"> </textarea>
+							<textarea  value="<?php echo set_value('message'); ?>" name="message" type="" class="span5" style="resize: vertical;"> </textarea>
 						<?php echo form_error('message'); ?></div>
 					</div>
 				</div>
@@ -72,7 +71,7 @@
 					<div class="controls">
 						<!-- Multiple Checkboxes -->
 						<label class="checkbox">
-							<input type="checkbox" value="Send me a copy!">
+							<input type="checkbox" name="copyemail" value="Send me a copy!">
 							Send me a copy! </label>
 					</div>
 

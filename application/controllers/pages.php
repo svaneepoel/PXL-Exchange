@@ -2,27 +2,39 @@
 
 class Pages extends CI_Controller {
 
-	public function view($page = 'home') {
+	public function about() {
+		$this -> load -> library('form_validation');
 
-		$this -> load -> library('googlemaps');
+		$this -> form_validation -> set_rules('name', 'Name', 'trim|required');
+		$this -> form_validation -> set_rules('email', 'Email', 'trim|required|valid_email');
+		$this -> form_validation -> set_rules('message', 'Message', 'required');
+		$this -> form_validation -> set_error_delimiters('<div class="label label-important">', '</div>');
 
-		$config['center'] = '37.4419, -122.1419';
-		$config['zoom'] = 'auto';
-		$config['cluster'] = TRUE;
-		$this -> googlemaps -> initialize($config);
+		if ($this -> form_validation -> run() == FALSE) {
+			$this -> load -> view('header');
+			$this -> load -> view('about');
+			$this -> load -> view('footer');
+		} else {
+			$this -> load -> view('header');
+			$this -> output -> append_output("<div class='alert alert-success'>We'll contact you as soon as possible!</div>");
+			$this -> load -> view('about');
+			$this -> load -> view('footer');
 
-		$marker = array();
-		$marker['position'] = '37.429, -122.1419';
-		$marker['title'] = "Dit is een test";
-		$marker['cursor'] = base_url() . 'assets/Lion1.cur';
-		$marker['icon'] = 'http://yovogan.free.fr/memes/problem.jpg';
-		$this -> googlemaps -> add_marker($marker);
+			$this -> load -> library('email');
+			$email = $this -> input -> post("email");
+			$name = $this -> input -> post("name");
+			$message = $this -> input -> post("message");
 
-		$data['map'] = $this -> googlemaps -> create_map();
+			$this -> email -> from($email, $name);
+			$this -> email -> to('svaneepoel@gmail.com');
+			if (isset($_POST['copyemail'])) {
+				$this -> email -> cc($email);
+			}
+			$this -> email -> subject('Contactform PHL Exchange');
+			$this -> email -> message($name . ' sent you the following email: ' . $message);
+			$this -> email -> send();
 
-		$this -> load -> view('header');
-		$this -> load -> view('maps', $data);
-		$this -> load -> view('footer');
+		}
 	}
 
 	public function home() {
@@ -33,11 +45,9 @@ class Pages extends CI_Controller {
 		$vnaam = $row -> vnaam;
 		$data['person1'] = $vnaam;
 
-
-
 		/*$count = $this -> db -> count_all('users');
-		$random = rand(7, 15);
-		$query = $this -> db -> query('SELECT vnaam FROM `users` WHERE id =' . $random);*/
+		 $random = rand(7, 15);
+		 $query = $this -> db -> query('SELECT vnaam FROM `users` WHERE id =' . $random);*/
 
 		//echo $items[array_rand($items)];
 

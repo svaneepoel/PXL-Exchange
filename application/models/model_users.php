@@ -2,19 +2,20 @@
 
 Class Model_users extends CI_Model {
 
+	// Inloggen van de gebruiker, indien gelukt wordt het user_id  teruggegeven
 	public function can_log_in() {
-
 		$this -> db -> where('email', $this -> input -> post('email'));
 		$this -> db -> where('password', md5($this -> input -> post('password')));
-
 		$query = $this -> db -> get('users');
-
 		if ($query -> num_rows() == 1) {
-			return true;
+			return $query->row()->id;
 		} else {
 			return false;
 		}
-
+	}
+	
+	public function get_id_by_email($email){
+		return $this->db->where('email', $email)->get('users')->row()->id;
 	}
 
 	public function add_temp_users($key) {
@@ -67,6 +68,10 @@ Class Model_users extends CI_Model {
 		if ($did_add_user) {
 			$this -> db -> where('key', $key);
 			$this -> db -> delete('temp_users');
+			
+			$this->db->insert('user_details', array('user_id'=>$did_add_user));
+			$this->db->insert('user_internships', array('user_id'=>$did_add_user));
+			
 			return $data['email'];
 		} else {
 			return false;

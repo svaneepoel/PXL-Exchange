@@ -1,0 +1,124 @@
+<div style="text-align:center;">
+	<div class='input-append' style="height:50px;">
+		<div class="page-header">
+			<h1>Administrator <small>Panel</small></h1>
+		</div>
+
+	</div>
+</div>
+<br/>
+
+<ul class="nav nav-tabs" id="myTab">
+	<li>
+		<a href="#approve">Approve</a>
+	</li>
+	<li>
+		<a href="#statistics">Statistics</a>
+	</li>
+	<li>
+		<a href="#settings">Settings</a>
+	</li>
+</ul>
+
+<div class="tab-content">
+	<div class="tab-pane fade in active" id="approve">
+		<?php
+		echo "<table class='table .table-striped'>";
+		$query = $this -> db -> query('SELECT id, vnaam, anaam, email, is_active FROM `users`');
+		foreach ($query->result_array() as $row) {
+			if ($row['is_active'] == 0) {
+				echo "<tr class='error'>";
+			} else {
+				echo "<tr class='success'>";
+			}
+			echo "<td>";
+			echo $row['id'];
+			echo "</td><td>";
+			echo $row['vnaam'];
+			echo " ";
+			echo $row['anaam'];
+			echo "</td><td>";
+			echo $row['email'];
+			echo "</td>";
+			if ($row['is_active'] == 0) {
+				echo "<td>";
+				echo "<a class='btn btn-small btn-warning' href='http://localhost/exchange/admin/approve/" . $row['id'] . "'?>Approve!</a>";
+				echo "</td>";
+			} else {
+				echo "<td>Reeds toegevoegd</td>";
+			}
+			echo "</tr>";
+		}
+
+		echo "</table>";
+		?>
+	</div>
+
+	<div class="tab-pane fade in" id="statistics">
+		<?php
+
+		echo "Aantal gebruikers geregistreerd: <span class='badge badge-info'>" . $this -> db -> count_all_results('users')."</span>";
+		echo "<br/>Waarvan gebruikers goedgekeurd: <span class='badge badge-success'>";
+		$this -> db -> like('is_active', '1');
+		$this -> db -> from('users');
+		echo $this -> db -> count_all_results()."</span>";
+		?>
+	</div>
+	<div class="tab-pane fade in" id="settings">
+
+		<form action="" method="post" class="form-horizontal">
+			<fieldset>
+				<div id="legend" class="">
+					<legend class="">
+						Settings
+					</legend>
+				</div>
+				<div class="control-group">
+
+					<label class="control-label" for="input01">Old password</label>
+					<div class="controls">
+						<input name="oldpassword" type="password" class="input-xlarge">
+
+					</div>
+				</div>
+
+				<div class="control-group">
+
+					<label class="control-label" for="input01">New password</label>
+					<div class="controls">
+						<input name="newpassword" type="password" class="input-xlarge">
+
+					</div>
+				</div>
+
+				<div class="control-group">
+
+					<label class="control-label" for="input01">Repeat new password</label>
+					<div class="controls">
+						<input name="repeatpassword" type="password" class="input-xlarge">
+
+					</div>
+				</div>
+				<div class="control-group">
+
+					<div class="controls">
+						<button  name="changepassword" type="submit" class="btn btn-success">
+							Save
+						</button>
+					</div>
+				</div>
+
+			</fieldset>
+		</form>
+
+	</div>
+</div>
+<script>
+	$('#myTab a').click(function(e) {
+		e.preventDefault();
+		$(this).tab('show');
+	})
+	$('#myTab a:last').tab('show');
+	$('#myTab a:first').tab('show'); 
+</script>
+

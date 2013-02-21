@@ -25,7 +25,7 @@
 				float: left;
 				margin-left: 5px;
 			}
-			.menu li a {
+			.menu li a.btn {
 				display: block;
 				width: 50px;
 				padding: 20px;
@@ -61,8 +61,8 @@
 		</style>
 		<script>
 			$(document).ready(function() {
-				$('#uitgebreid-zoeken').click(function() {
-					$('#ds').fadeToggle('fast');
+				$('#user-button').click(function() {
+					$('#user-menu').fadeToggle('fast');
 					return false;
 				});
 			});
@@ -70,7 +70,14 @@
 
 	</head>
 	<body>
-
+		<?php
+		function is_active($menukey) {
+			if (isset($_SESSION['menukey']) && $_SESSION['menukey'] == $menukey)
+				return 'class="active"';
+			else
+				return false;
+		}
+		?>
 		<div class="container">
 			<div class="clearfix">
 				<div class="well logo-box">
@@ -78,14 +85,6 @@
 				</div>
 
 				<div style="float:right; margin-top:30px;">
-					<?php
-					function is_active($menukey) {
-						if (isset($_SESSION['menukey']) && $_SESSION['menukey'] == $menukey)
-							return 'class="active"';
-						else
-							return false;
-					}
-					?>
 					<ul class="menu">
 						<li <?php echo is_active('home'); ?>>
 							<a href="<?php echo base_url(); ?>pages/home" class="btn"><i class="icon icon-home icon-large"></i>Home</a>
@@ -101,29 +100,50 @@
 						</li>
 						<li>
 							<div class="btn-group">
-								<a href="<?php echo base_url(); ?>" class="btn dropdown-toggle" data-toggle="dropdown"><i class="icon icon-user icon-large"></i>User</a>
+								<a href="<?php echo base_url(); ?>" class="btn" id="user-button"><i class="icon icon-user icon-large"></i>User</a>
 
-								<div class="dropdown-menu" style="padding: 10px;">
-									<form>
+								<div id="user-menu" class="dropdown-menu" style="position:absolute; z-index:100; padding: 10px;">
+									<form action="<?php echo base_url(); ?>login/login_validation" method="post">
+										<?php var_dump($_SESSION); if(!isset($_SESSION['is_logged_in'])){ ?>
 										<fieldset>
 											<legend>
 												Login
 											</legend>
-											<input type="text" placeholder="Username">
+											<input type="text" name="email" placeholder="Email" />
 											<br/>
-											<input type="password" placeholder="Password">
+											<input type="password" name="password" placeholder="Password" />
 											<br/>
 											<button type="submit" class="btn btn-success">
 												Login
 											</button>
+											or <a href="<?php echo base_url(); ?>login/signup" class="nobtn">sign up</a> (only for exchange students).
 											<br/>
 											<hr>
-											<img class="facebook" width="220" src="<?php echo base_url(); ?>assets/img/facebook.png" alt="fb_login"
-											</fieldset>
-											</form>
-											</div>
-											</div>
-											</li>
+											<img class="facebook" width="220" src="<?php echo base_url(); ?>assets/img/facebook.png" alt="fb_login" />
+											<?php } else { ?>
+												<ul>
+													<li>
+														<a href="nobtn" href="<?php echo base_url(); ?>login/logout">Log out</a>
+													</li>
+													<li>
+														<a href="nobtn" href="<?php echo base_url(); ?>profile">Go to your profile</a>
+													</li>
+													<li>
+														<a href="nobtn" href="<?php echo base_url(); ?>profile/edit">Edit profile</a>
+													</li>
+													<li>
+														<a href="nobtn" href="<?php echo base_url(); ?>profile/picture">Edit profile picture</a>
+													</li>
+													<li>
+														<a href="nobtn" href="<?php echo base_url(); ?>profile/internship">Edit internship details</a>
+													</li>
+												</ul>
+											<?php } ?>
+										</fieldset>
+									</form>
+								</div>
+							</div>
+						</li>
 					</ul>
 				</div>
 

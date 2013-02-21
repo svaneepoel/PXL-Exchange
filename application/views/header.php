@@ -59,7 +59,15 @@
 				margin-bottom: 8px;
 			}
 		</style>
-		
+		<script>
+			$(document).ready(function() {
+				$('#uitgebreid-zoeken').click(function() {
+					$('#ds').fadeToggle('fast');
+					return false;
+				});
+			});
+		</script>
+
 	</head>
 	<body>
 
@@ -70,14 +78,13 @@
 				</div>
 
 				<div style="float:right; margin-top:30px;">
-					<?php					
-					function is_active($menukey){
-						if(isset($_SESSION['menukey'])&&$_SESSION['menukey'] == $menukey)
+					<?php
+					function is_active($menukey) {
+						if (isset($_SESSION['menukey']) && $_SESSION['menukey'] == $menukey)
 							return 'class="active"';
 						else
 							return false;
 					}
-					
 					?>
 					<ul class="menu">
 						<li <?php echo is_active('home'); ?>>
@@ -96,23 +103,27 @@
 							<div class="btn-group">
 								<a href="<?php echo base_url(); ?>" class="btn dropdown-toggle" data-toggle="dropdown"><i class="icon icon-user icon-large"></i>User</a>
 
-								<ul class="dropdown-menu" style="padding: 10px;">
+								<div class="dropdown-menu" style="padding: 10px;">
 									<form>
 										<fieldset>
 											<legend>
 												Login
 											</legend>
-											<input type="text" placeholder="Username"><br/>
-											<input type="password" placeholder="Password"><br/>
+											<input type="text" placeholder="Username">
+											<br/>
+											<input type="password" placeholder="Password">
+											<br/>
 											<button type="submit" class="btn btn-success">
 												Login
-											</button><br/><hr>
+											</button>
+											<br/>
+											<hr>
 											<img class="facebook" width="220" src="<?php echo base_url(); ?>assets/img/facebook.png" alt="fb_login"
-										</fieldset>
-									</form>
-								</ul>
-							</div>
-
+											</fieldset>
+											</form>
+											</div>
+											</div>
+											</li>
 					</ul>
 				</div>
 

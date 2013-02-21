@@ -70,18 +70,27 @@
 				</div>
 
 				<div style="float:right; margin-top:30px;">
+					<?php					
+					function is_active($menukey){
+						if(isset($_SESSION['menukey'])&&$_SESSION['menukey'] == $menukey)
+							return 'class="active"';
+						else
+							return false;
+					}
+					
+					?>
 					<ul class="menu">
-						<li class="active">
-							<a href="<?php echo base_url(); ?>main/home" class="btn"><i class="icon icon-home icon-large"></i>Home</a>
+						<li <?php echo is_active('home'); ?>>
+							<a href="<?php echo base_url(); ?>pages/home" class="btn"><i class="icon icon-home icon-large"></i>Home</a>
 						</li>
-						<li>
-							<a href="<?php echo base_url(); ?>discover/view" class="btn"><i class="icon icon-globe icon-large"></i>Discover</a>
+						<li <?php echo is_active('discover'); ?>>
+							<a href="<?php echo base_url(); ?>discover" class="btn"><i class="icon icon-globe icon-large"></i>Discover</a>
 						</li>
-						<li>
+						<li <?php echo is_active('search'); ?>>
 							<a href="<?php echo base_url(); ?>" class="btn"><i class="icon icon-search icon-large"></i>Search</a>
 						</li>
-						<li>
-							<a href="<?php echo base_url(); ?>about/view" class="btn"><i class="icon icon-book-open icon-large"></i>Info</a>
+						<li <?php echo is_active('info'); ?>>
+							<a href="<?php echo base_url(); ?>pages/about" class="btn"><i class="icon icon-book-open icon-large"></i>Info</a>
 						</li>
 						<li>
 							<div class="btn-group">

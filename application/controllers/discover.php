@@ -3,6 +3,7 @@
 class Discover extends CI_Controller {
 
 	public function index() {
+		$_SESSION['menukey'] = 'discover';
 		$center = $this->input->post("test");
 		if(!$center){
 			$center = 'Belgium';

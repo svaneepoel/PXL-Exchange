@@ -3,6 +3,7 @@
 class Pages extends CI_Controller {
 
 	public function about() {
+		$_SESSION['menukey'] = 'info';
 		$this -> load -> library('form_validation');
 
 		$this -> form_validation -> set_rules('name', 'Name', 'trim|required');
@@ -38,6 +39,7 @@ class Pages extends CI_Controller {
 	}
 
 	public function home() {
+		$_SESSION['menukey'] = 'home';
 		// BEGIN Random personen selecteren
 
 		$query2 = $this -> db -> query("SELECT vnaam FROM `users` ORDER BY RAND() LIMIT 0,4;");

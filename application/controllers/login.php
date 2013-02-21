@@ -13,19 +13,9 @@ class Login extends CI_Controller {
 	}
 
 	public function signup() {
+		$this -> load -> view('header');
 		$this -> load -> view('signup');
-	}
-
-	public function members() {
-		if ($this -> session -> userdata('is_logged_in')) {
-			$this -> load -> view('members');
-		} else {
-			redirect('login/restricted');
-		}
-	}
-
-	public function restricted() {
-		$this -> load -> view('restricted');
+		$this -> load -> view('footer');
 	}
 
 	public function login_validation() {
@@ -36,12 +26,17 @@ class Login extends CI_Controller {
 		$this -> form_validation -> set_rules('password', 'Password', 'required|md5|trim');
 
 		if ($this -> form_validation -> run()) {
-			$data = array('email' => $this -> input -> post('email'), 'is_logged_in' => 1);
+			$data = array(
+				'email' => $this -> input -> post('email'),
+				'is_logged_in' => 1
+			);
 
 			$this -> session -> set_userdata($data);
-			redirect('login/members');
+			redirect('pages/home');
 		} else {
+			$this -> load -> view('header');
 			$this -> load -> view('login');
+			$this -> load -> view('footer');
 		}
 	}
 
@@ -110,7 +105,11 @@ class Login extends CI_Controller {
 		if ($this -> model_users -> is_valid_key($key)) {
 			if ($newemail = $this -> model_users -> add_user($key)) {
 				$uid = $this -> model_users -> get_id_by_email($newemail);
-				$data = array('email' => $newemail, 'is_logged_in' => 1, 'user_id' => $uid);
+				$data = array(
+					'email' => $newemail,
+					'is_logged_in' => 1,
+					'user_id' => $uid
+				);
 				$this -> session -> set_userdata($data);
 				redirect('login/members');
 			} else {

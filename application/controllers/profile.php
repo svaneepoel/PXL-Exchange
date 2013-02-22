@@ -63,22 +63,6 @@ class Profile extends CI_Controller {
 		$this -> load -> model('model_users');
 		$this -> model_users -> set_id($this -> session -> userdata('user_id'));
 
-		 $config['center'] = 'Belgium';
-		 $config['zoom'] = 'auto';
-		 $config['places'] = TRUE;
-		 $config['placesAutocompleteInputID'] = 'myPlaceTextBox';
-		 $config['placesAutocompleteBoundsMap'] = TRUE;
-		 $this -> googlemaps -> initialize($config);
-		 $data['map'] = $this -> googlemaps -> create_map();
-
-
-		$config = array();
-
-		
-		$data['map'] = $this -> googlemaps -> create_map();
-		$data['internship_details'] = $this -> model_users -> get_internship(); 
-
-		
 		$this -> form_validation -> set_rules('company_name', 'Company name', 'required|trim');
 		$this -> form_validation -> set_rules('description', 'Description', 'required');
 		$this -> form_validation -> set_rules('location', 'Location', 'required');
@@ -88,7 +72,7 @@ class Profile extends CI_Controller {
 			$this -> model_users -> update_internship_details();
 			$this -> output -> append_output("<div class='alert alert-success'>Your internship details have been updated</div>");
 		}
-		
+		$data['internship_details'] = $this -> model_users -> get_internship(); 
 		$this -> load -> view('edit_internship', $data);
 		$this -> load -> view('footer');
 	}

@@ -116,8 +116,8 @@ Class Model_users extends CI_Model {
 		$data = array(
 			'company_name' => $this -> input -> post('company_name'),
 			'location' => $this -> input -> post('location'),
-			'latitude' => $this -> input -> post('latitude'),
-			'longitude' => $this -> input -> post('longitude'),
+			'latitude' => $this -> input -> post('lat'),
+			'longitude' => $this -> input -> post('lng'),
 			'description' => $this -> input -> post('description')
 		);
 

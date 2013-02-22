@@ -16,7 +16,7 @@ class Profile extends CI_Controller {
 		// Alle blogposts krijgen
 		$this -> load -> model('model_blog');
 		$this -> load -> model('model_users');
-		$this -> model_users -> set_id($this->session->userdata('user_id'));
+		$this -> model_users -> set_id($this -> session -> userdata('user_id'));
 
 		$posts = $this -> model_blog -> get_blogs($uid);
 
@@ -29,12 +29,7 @@ class Profile extends CI_Controller {
 		$internship = $this -> model_users -> get_internship();
 
 		$this -> load -> view('header');
-		$this -> load -> view('profile', array(
-			'blog' => $html,
-			'details' => $details,
-			'user' => $user,
-			'internship' => $internship
-		));
+		$this -> load -> view('profile', array('blog' => $html, 'details' => $details, 'user' => $user, 'internship' => $internship));
 		$this -> load -> view('footer');
 
 	}
@@ -43,7 +38,7 @@ class Profile extends CI_Controller {
 		$this -> load -> view('header');
 		$this -> load -> library('form_validation');
 		$this -> load -> model('model_users');
-		$this -> model_users -> set_id($this->session->userdata('user_id'));
+		$this -> model_users -> set_id($this -> session -> userdata('user_id'));
 
 		$this -> form_validation -> set_rules('hobbies', 'Message', 'required');
 		$this -> form_validation -> set_rules('education', 'Education', 'required');
@@ -53,15 +48,49 @@ class Profile extends CI_Controller {
 			$this -> model_users -> update_user_details();
 			$this -> output -> append_output("<div class='alert alert-success'>Your profile has been updated</div>");
 		}
-		$this -> load -> view('edit_profile', array('user_details'=>$this->model_users->get_user_details()));
+		$this -> load -> view('edit_profile', array('user_details' => $this -> model_users -> get_user_details()));
 		$this -> load -> view('footer');
 	}
-	
+
 	public function internship() {
+
+		/* MITCH, GEBRUIK DEZE CODE ALS DIE VAN GEOLOCATIE TE MOEILIJK IS --> ANDERS DEZE VERWIJDEREN
+		 $this -> load -> library('googlemaps');
+		 $config['center'] = 'Belgium';
+		 $config['zoom'] = 'auto';
+		 $config['places'] = TRUE;
+		 $config['placesAutocompleteInputID'] = 'myPlaceTextBox';
+		 $config['placesAutocompleteBoundsMap'] = TRUE;
+		 $this -> googlemaps -> initialize($config);
+		 $data['map'] = $this -> googlemaps -> create_map();*/
+
+		 //Begin maps op basis van geolocatie
+		$this -> load -> library('googlemaps');
+		$config['places'] = TRUE;
+		$config['placesAutocompleteInputID'] = 'myPlaceTextBox';
+		$config['placesAutocompleteBoundsMap'] = TRUE;
+		$this -> googlemaps -> initialize($config);
+		$config = array();
+		$config['center'] = 'auto';
+		$config['onboundschanged'] = 'if (!centreGot) {
+	var mapCentre = map.getCenter();
+	marker_0.setOptions({
+		position: new google.maps.LatLng(mapCentre.lat(), mapCentre.lng()) 
+	});
+}
+centreGot = true;';
+		$this -> googlemaps -> initialize($config);
+		$marker = array();
+		$this -> googlemaps -> add_marker($marker);
+
+		$data['map'] = $this -> googlemaps -> create_map();
+ //Einde maps op basis van geolocatie
+ 
 		$this -> load -> view('header');
+		$this -> load -> view('edit_internship', $data);
 		$this -> load -> library('form_validation');
 		$this -> load -> model('model_users');
-		$this -> model_users -> set_id($this->session->userdata('user_id'));
+		$this -> model_users -> set_id($this -> session -> userdata('user_id'));
 
 		$this -> form_validation -> set_rules('company_name', 'Company name', 'required|trim');
 		$this -> form_validation -> set_rules('description', 'Description', 'required');
@@ -72,7 +101,7 @@ class Profile extends CI_Controller {
 			$this -> model_users -> update_internship_details();
 			$this -> output -> append_output("<div class='alert alert-success'>Your internship details have been updated</div>");
 		}
-		$this -> load -> view('edit_profile', array('internship_details'=>$this->model_users->get_internship_details()));
+		$this -> load -> view('edit_profile', array('internship_details' => $this -> model_users -> get_internship()));
 		$this -> load -> view('footer');
 	}
 

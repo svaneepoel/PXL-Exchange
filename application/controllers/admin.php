@@ -4,7 +4,9 @@ class Admin extends CI_Controller {
 
 	public function index() {
 		$this -> load -> model('model_users');
+$this -> load -> model('model_config');
 
+		$data['abouttext'] = $this -> model_config -> get_about();
 		$this -> load -> library('form_validation');
 		$data['countusers'] = $this -> model_users -> get_countusers();
 		$data['countapprovedusers'] = $this -> model_users -> get_countapprovedusers();
@@ -73,6 +75,16 @@ class Admin extends CI_Controller {
 		 $this -> email -> send();*/
 
 		redirect('admin/index');
+	}
+
+	public function about() {
+		$this -> load -> model('model_config');
+		$aboutpage = $this -> input -> post("aboutpage");
+		echo $aboutpage ;
+		echo "123";
+		$this -> model_config -> set_about($aboutpage);
+		//redirect('admin/index');
+		
 	}
 
 }

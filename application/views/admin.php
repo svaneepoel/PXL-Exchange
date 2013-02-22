@@ -14,6 +14,9 @@
 		<a href="#approve">Approve</a>
 	</li>
 	<li>
+		<a href="#about">About</a>
+	</li>
+	<li>
 		<a href="#statistics">Statistics</a>
 	</li>
 	<li>
@@ -24,7 +27,7 @@
 	<div class="tab-pane fade in active" id="approve">
 		<?php
 		echo "<table class='table .table-striped'>";
-		
+
 		foreach ($users as $row) {
 			if ($row['is_active'] == 0) {
 				echo "<tr class='error'>";
@@ -42,16 +45,15 @@
 			echo "</td>";
 			if ($row['is_active'] == 0) {
 				echo "<td>";
-				echo "<a class='btn btn-small btn-success' href='".base_url()."admin/approve/" . $row['id'] . "'?>Approve</a>";
+				echo "<a class='btn btn-small btn-success' href='" . base_url() . "admin/approve/" . $row['id'] . "'?>Approve</a>";
 				echo " ";
-				echo "<a class='btn btn-small btn-warning' href='".base_url()."admin/refuse/" . $row['id'] . "'?>Refuse</a>";
+				echo "<a class='btn btn-small btn-warning' href='" . base_url() . "admin/refuse/" . $row['id'] . "'?>Refuse</a>";
 				echo "</td>";
 			} else {
-				if ($row['is_active']==2){
-				echo "<td><button class='btn btn-small btn-inverse disabled' disabled='disabled'>Admin</button></td>";
-				}
-				else {
-					echo "<td><a class='btn btn-small btn-danger' href='".base_url()."admin/refuse/" . $row['id'] . "'?>Delete</a></td>";
+				if ($row['is_active'] == 2) {
+					echo "<td><button class='btn btn-small btn-inverse disabled' disabled='disabled'>Admin</button></td>";
+				} else {
+					echo "<td><a class='btn btn-small btn-danger' href='" . base_url() . "admin/refuse/" . $row['id'] . "'?>Delete</a></td>";
 				}
 			}
 			echo "</tr>";
@@ -64,10 +66,10 @@
 	<div class="tab-pane fade in" id="statistics">
 		<?php
 
-		echo "Aantal gebruikers geregistreerd: <span class='badge badge-info'>" . $countusers ."</span>";
+		echo "Aantal gebruikers geregistreerd: <span class='badge badge-info'>" . $countusers . "</span>";
 		echo "<br/>Waarvan gebruikers goedgekeurd: <span class='badge badge-success'>";
-		
-		echo $countapprovedusers."</span>";
+
+		echo $countapprovedusers . "</span>";
 		?>
 	</div>
 	<div class="tab-pane fade in" id="settings">
@@ -119,6 +121,21 @@
 		</form>
 
 	</div>
+	<div class="tab-pane fade in" id="about">
+		<form action="<?php echo base_url() ?>admin/about" method="post">
+			<fieldset>
+				<legend>
+					Change the about is page content
+				</legend>
+				<textarea class="span11" name"aboutpage" rows="10"  style="resize: vertical;"><?php echo $abouttext; ?></textarea>				
+												
+ <br/>
+				<button type="submit" class="btn btn-success">
+					Save
+				</button>
+			</fieldset>
+		</form>
+	</div>
 </div>
 <script>
 	$('#myTab a').click(function(e) {
@@ -126,6 +143,6 @@
 		$(this).tab('show');
 	})
 	/*$('#myTab a:last').tab('show');
-	$('#myTab a:first').tab('show'); */
+	 $('#myTab a:first').tab('show'); */
 </script>
 

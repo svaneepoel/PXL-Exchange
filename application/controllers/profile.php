@@ -1,9 +1,9 @@
 <?php
 
 class Profile extends CI_Controller {
-	public function index(){
-		$uid = $this->session->userdata('user_id');
-		if(!$uid){
+	public function index() {
+		$uid = $this -> session -> userdata('user_id');
+		if (!$uid) {
 			redirect("pages/home");
 		} else {
 			redirect("profile/view/$uid");
@@ -28,7 +28,12 @@ class Profile extends CI_Controller {
 		$internship = $this -> model_users -> get_internship($uid);
 
 		$this -> load -> view('header');
-		$this -> load -> view('profile', array('blog' => $html, 'details' => $details, 'user' => $user, 'internship' => $internship));
+		$this -> load -> view('profile', array(
+			'blog' => $html,
+			'details' => $details,
+			'user' => $user,
+			'internship' => $internship
+		));
 		$this -> load -> view('footer');
 
 	}
@@ -48,19 +53,19 @@ class Profile extends CI_Controller {
 		$config['encrypt_name'] = TRUE;
 
 		$this -> load -> library('upload', $config);
-		$this->load->library('form_validation');
-		
+		$this -> load -> library('form_validation');
+
 		$this -> load -> view('header');
-		
-		if(!empty($_FILES)){
-		if (!$this -> upload -> do_upload()) {
-			$this -> output -> append_output($this -> upload -> display_errors('<div class="alert alert-error">','</div>'));
-		} else {
-			// Melding weergeven en profielpagina toevoegen in DB
-			$this->output->append_output('<div class="alert alert-success">Your profile picture has been edited.</div>');
-			$data = $this->upload->data();
-			$this->db->where('id', $this->session->userdata('user_id'))->update('user_details', array('picture'=>$data['file_name']));
-		}
+
+		if (!empty($_FILES)) {
+			if (!$this -> upload -> do_upload()) {
+				$this -> output -> append_output($this -> upload -> display_errors('<div class="alert alert-error">', '</div>'));
+			} else {
+				// Melding weergeven en profielpagina toevoegen in DB
+				$this -> output -> append_output('<div class="alert alert-success">Your profile picture has been edited.</div>');
+				$data = $this -> upload -> data();
+				$this -> db -> where('user_id', $this -> session -> userdata('user_id')) -> update('user_details', array('picture' => $data['file_name']));
+			}
 		}
 		$this -> load -> view('edit_profile_picture');
 		$this -> load -> view('footer');

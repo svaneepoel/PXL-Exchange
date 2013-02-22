@@ -2,7 +2,8 @@
 	
 	<div style="margin:10px; width:180px; margin-left:5px; padding-right:10px; overflow:hidden;">
 		<?php if(!empty($details->picture)){
-			echo "<img class='img-polaroid' src='$details->picture' /><br/><br/>";
+			$prefix = base_url();
+			echo "<img class='img-polaroid' src='$prefix/uploads/$details->picture' /><br/><br/>";
 		}
 		echo "<span style='font-size:14pt;'>$user->vnaam $user->anaam</span>";
 		?>

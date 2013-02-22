@@ -1,10 +1,6 @@
-- Frontpage afwerken (3 laatst toegevoegde personen)
-- Heel de zoekfunctie nog
-- Facebook login
 - Meer tabbladen bij about pagina (zie informative part in richtlijnen)
 - Admin zou eigenlijk deze tekstjes moeten kunnen aanpassen...
 - bij discover, zorgen dat daar de stagebedrijven komen van de gebruikers
-- Blogs toevoegen/aanpassen/verwijderen
 - Statistieken (ma k denk eig da bena niemand da heeft ze )
 - PHPDoc commentaren toevoegen (zoals bij model_users nu)
 - google analytics
@@ -12,3 +8,11 @@
 - Add/edit/page POI
 - Admin login
 - Voor pictures: picasa
+- Adminpage errors after submit oplossen MITCHHHHH
+
+- Heel de zoekfunctie nog
+- Facebook login
+- Blogs toevoegen/aanpassen/verwijderen
+
+
+- Vlak voor indienen, CONFIG IN ORDE BRENGEN LUCASSSSSSSSSSSSS

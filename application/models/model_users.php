@@ -107,23 +107,55 @@ Class Model_users extends CI_Model {
 	}
 
 	public function get_latestusers() {
-		$query = $this -> db -> query('SELECT u.id id, u.vnaam vnaam, u.anaam anaam, ud.picture picture FROM users u, user_details ud WHERE ud.user_id =u.id  ORDER BY id DESC LIMIT 3');
+		$query = $this -> db -> query('SELECT u.id id, u.vnaam vnaam, u.anaam anaam, ud.picture picture FROM users u, user_details ud WHERE ud.user_id =u.id AND u.is_active = 1  ORDER BY id DESC LIMIT 3');
 		return $query -> result_array();
 	}
-	
+
 	public function get_userlist() {
 		$query = $this -> db -> query('SELECT id, vnaam, anaam, email, is_active FROM `users`');
 		return $query -> result_array();
 	}
-	
+
 	public function get_adminpw() {
 		$query = $this -> db -> query('SELECT password FROM `users` WHERE is_active = "2"');
 		return $query -> result_array();
 	}
-	
+	public function set_adminpw($data) {
+		$this -> db -> where('is_active', '2');
+		$this -> db -> update('users', $data);
+	}
+
 	public function get_approve($id) {
 		$query = $this -> db -> query('SELECT vnaam, anaam, email FROM `users` WHERE id=' . $id);
 		return $query -> result_array();
 	}
 
+	public function set_approve($data, $id) {
+		$data = array('is_active' => 1);
+		$this -> db -> where('id', $id);
+		$this -> db -> update('users', $data);
+	}
+
+	public function get_refuse($id) {
+		$query = $this -> db -> query('SELECT vnaam, anaam, email FROM `users` WHERE id=' . $id);
+		return $query -> result_array();
+	}
+
+	public function set_refuse($id) {
+		$this -> db -> delete('users', array('id' => $id));
+		$this -> db -> delete('user_details', array('user_id' => $id));
+		$this -> db -> delete('user_internships', array('user_id' => $id));
+	}
+	
+	public function get_countusers() {
+		return $this -> db -> count_all_results('users');
+	}
+	
+	public function get_countapprovedusers() {
+		$this -> db -> where('is_active', '1');
+		$this -> db -> or_where('is_active', '2');
+		
+		$this -> db -> from('users');
+		return $this -> db -> count_all_results();
+	}
 }

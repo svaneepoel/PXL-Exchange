@@ -67,6 +67,7 @@ class Pages extends CI_Controller {
 		// BEGIN laatste 3 personen selecteren
 		$data['users'] = $this -> model_users -> get_latestusers();
 		//END laatste 3  personen selecteren
+		
 		$this -> load -> view('header', $data);
 		$this -> load -> view('home');
 		$this -> load -> view('footer');

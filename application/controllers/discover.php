@@ -4,9 +4,11 @@ class Discover extends CI_Controller {
 
 	public function index() {
 		$_SESSION['menukey'] = 'discover';
+		$this -> load -> model('model_points');
 		$center = $this->input->post("test");
 		if(!$center){
 			$center = 'Belgium';
+			$config['zoom'] = '3';
 		}
 		
 		$this -> load -> library('googlemaps');
@@ -19,8 +21,8 @@ class Discover extends CI_Controller {
 		$this -> googlemaps -> initialize($config);
 
 		// BEGIN MARKERS - Alle markers uit database halen en toevoegen aan de kaart
-		$query = $this -> db -> query('SELECT latitude, longitude, information FROM `points`');
-		foreach ($query->result_array() as $row) {
+		
+		foreach ($this -> model_points ->get_points() as $row) {
 			$latitude = $row['latitude'];
 			$longitude = $row['longitude'];
 			$marker = array();
@@ -40,6 +42,7 @@ class Discover extends CI_Controller {
 	}
 	
 	public function addmarkers($page = 'home') {
+		$this -> load -> model('model_points');
 		$this -> load -> library('googlemaps');
 		$config['zoom'] = '3';
 		$config['cluster'] = TRUE;
@@ -47,8 +50,8 @@ class Discover extends CI_Controller {
 		$this -> googlemaps -> initialize($config);
 		
 		// BEGIN MARKERS - Alle markers uit database halen en toevoegen aan de kaart
-		$query = $this -> db -> query('SELECT latitude, longitude, information FROM `points`');
-		foreach ($query->result_array() as $row) {
+		
+		foreach ($this -> model_points ->get_points() as $row) {
 			$latitude = $row['latitude'];
 			$longitude = $row['longitude'];
 			$marker = array();

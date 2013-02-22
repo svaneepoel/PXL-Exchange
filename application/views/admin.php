@@ -47,7 +47,12 @@
 				echo "<a class='btn btn-small btn-warning' href='".base_url()."admin/refuse/" . $row['id'] . "'?>Refuse</a>";
 				echo "</td>";
 			} else {
-				echo "<td><a class='btn btn-small btn-danger' href='".base_url()."admin/refuse/" . $row['id'] . "'?>Delete</a></td>";
+				if ($row['is_active']==2){
+				echo "<td><button class='btn btn-small btn-inverse disabled' disabled='disabled'>Admin</button></td>";
+				}
+				else {
+					echo "<td><a class='btn btn-small btn-danger' href='".base_url()."admin/refuse/" . $row['id'] . "'?>Delete</a></td>";
+				}
 			}
 			echo "</tr>";
 		}
@@ -59,13 +64,10 @@
 	<div class="tab-pane fade in" id="statistics">
 		<?php
 
-		echo "Aantal gebruikers geregistreerd: <span class='badge badge-info'>" . $this -> db -> count_all_results('users')."</span>";
+		echo "Aantal gebruikers geregistreerd: <span class='badge badge-info'>" . $countusers ."</span>";
 		echo "<br/>Waarvan gebruikers goedgekeurd: <span class='badge badge-success'>";
-		$this -> db -> where('is_active', '1');
-		$this -> db -> or_where('is_active', '2');
 		
-		$this -> db -> from('users');
-		echo $this -> db -> count_all_results()."</span>";
+		echo $countapprovedusers."</span>";
 		?>
 	</div>
 	<div class="tab-pane fade in" id="settings">
@@ -126,11 +128,4 @@
 	/*$('#myTab a:last').tab('show');
 	$('#myTab a:first').tab('show'); */
 </script>
-<?php
-		if (isset($error)){
-			
-			echo $error;
-		}
-		
-		?>
 

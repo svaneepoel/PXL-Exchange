@@ -56,6 +56,8 @@ class Login extends CI_Controller {
 		$this -> load -> library('form_validation');
 		$this -> load -> model('model_users');
 
+		$this -> form_validation -> set_rules('vnaam', 'First name', 'required|trim');
+		$this -> form_validation -> set_rules('anaam', 'First name', 'required|trim');
 		$this -> form_validation -> set_rules('email', 'Email', 'required|trim|valid_email|is_unique[users.email]');
 		$this -> form_validation -> set_rules('password', 'Password', 'required|trim');
 		$this -> form_validation -> set_rules('cpassword', 'Confirm Password', 'required|trim|matches[password]');
@@ -66,7 +68,7 @@ class Login extends CI_Controller {
 			if ($uid !== false) {
 				$this->output->append_output("<div class='alert alert-success'>Thank you for signing up, you'll receive an email when your account has been enabled.</div>");
 			} else
-				$this->output->append_output("<div class='alert alert-success'>Thank you for signing up, you'll receive an email when your account has been enabled.</div>");
+				$this->output->append_output("<div class='alert alert-error'>Something went wrong while creating your user account.</div>");
 		} else {
 
 			$this -> load -> view('signup');

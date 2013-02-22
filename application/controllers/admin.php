@@ -75,10 +75,7 @@ class Admin extends CI_Controller {
 		$this -> db -> where('id', $id);
 		$this -> db -> update('users', $data);
 
-		$this -> load -> view('header');
-		$this -> output -> append_output("<center><div class='alert alert-success'>The user with name " . $name . " is successfully approved!</div><center>");
-		$this -> load -> view('admin');
-		$this -> load -> view('footer');
+		redirect('admin/index');
 	}
 
 }

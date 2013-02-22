@@ -58,6 +58,9 @@
 			.container #map_canvas {
 				margin-bottom: 8px;
 			}
+			ul#user-menu-options li {
+				clear:left;
+			}
 		</style>
 		<script>
 			$(document).ready(function() {
@@ -121,7 +124,7 @@
 											<hr>
 											<img class="facebook" width="220" src="<?php echo base_url(); ?>assets/img/facebook.png" alt="fb_login" />
 											<?php } else { ?>
-												<ul>
+												<ul id="user-menu-options">
 													<li>
 														<a href="<?php echo base_url(); ?>profile">Go to your profile</a>
 													</li>

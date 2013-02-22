@@ -10,7 +10,6 @@ class Admin extends CI_Controller {
 		$data['users'] = $this -> model_users ->get_userlist();
 		$data['jquery'] = null;
 		
-		
 		$this -> form_validation -> set_rules('oldpassword', 'Old password', 'required');
 		$this -> form_validation -> set_rules('newpassword', 'New password', 'required');
 		$this -> form_validation -> set_rules('repeatpassword', 'Repeat password', 'required');
@@ -45,7 +44,6 @@ class Admin extends CI_Controller {
 		foreach ($this -> model_users ->get_approve($id) as $row) {
 			$email = $row['email'];
 			$name = $row['vnaam'] . " " . $row['anaam'];
-
 		}
 		/*$this -> load -> library('email');
 		 $this -> email -> from($email, $name);
@@ -57,7 +55,7 @@ class Admin extends CI_Controller {
 		$data = array('is_active' => 1);
 		$this -> db -> where('id', $id);
 		$this -> db -> update('users', $data);
-
+		
 		redirect('admin/index');
 	}
 

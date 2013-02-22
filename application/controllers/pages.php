@@ -63,7 +63,7 @@ class Pages extends CI_Controller {
 		$data['map'] = $this -> googlemaps -> create_map();
 		// END Alle markers toevoegen vanuit de database
 		// BEGIN laatste 3 personen selecteren
-		$data['users'] = $this -> model_home -> get_latestusers();
+		$data['users'] = $this -> model_users -> get_latestusers();
 		//END laatste 3  personen selecteren
 		$this -> load -> view('header', $data);
 		$this -> load -> view('home');

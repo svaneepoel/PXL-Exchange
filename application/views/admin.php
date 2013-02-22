@@ -61,7 +61,9 @@
 
 		echo "Aantal gebruikers geregistreerd: <span class='badge badge-info'>" . $this -> db -> count_all_results('users')."</span>";
 		echo "<br/>Waarvan gebruikers goedgekeurd: <span class='badge badge-success'>";
-		$this -> db -> like('is_active', '1');
+		$this -> db -> where('is_active', '1');
+		$this -> db -> or_where('is_active', '2');
+		
 		$this -> db -> from('users');
 		echo $this -> db -> count_all_results()."</span>";
 		?>

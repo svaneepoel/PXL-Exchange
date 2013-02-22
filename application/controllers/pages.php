@@ -42,19 +42,22 @@ class Pages extends CI_Controller {
 		$_SESSION['menukey'] = 'home';
 		// BEGIN Random personen selecteren
 
-		$query2 = $this -> db -> query("SELECT vnaam FROM `users` ORDER BY RAND() LIMIT 0,4;");
+		$query2 = $this -> db -> query("SELECT id FROM `users` ORDER BY id DESC LIMIT 3;");
+		foreach ($query2->result() as $row) {
+			echo $row -> id;
+		}
+		
 		$row = $query2 -> row();
-		$vnaam = $row -> vnaam;
+		$vnaam = $row -> id;
 		$data['person1'] = $vnaam;
 
-		/*$count = $this -> db -> count_all('users');
-		 $random = rand(7, 15);
-		 $query = $this -> db -> query('SELECT vnaam FROM `users` WHERE id =' . $random);*/
 
-		//echo $items[array_rand($items)];
 
-		//$row = $query -> row();
-		//echo $row -> vnaam;
+		
+
+		
+
+
 
 		//END Random personen selecteren
 		// BEGIN Alle markers toevoegen vanuit de database
@@ -64,8 +67,7 @@ class Pages extends CI_Controller {
 		$config['cluster'] = TRUE;
 		$config['map_height'] = '200px';
 		$this -> googlemaps -> initialize($config);
-		
-		
+
 		$query = $this -> db -> query('SELECT latitude, longitude, information FROM `points`');
 		foreach ($query->result_array() as $row) {
 			$latitude = $row['latitude'];
@@ -76,11 +78,9 @@ class Pages extends CI_Controller {
 			$marker['infowindow_content'] = $row['information'];
 			$this -> googlemaps -> add_marker($marker);
 		}
-		
 
-		
 		// END Alle markers toevoegen vanuit de database
-		
+
 		$data['map'] = $this -> googlemaps -> create_map();
 		$this -> load -> view('header', $data);
 		$this -> load -> view('home');

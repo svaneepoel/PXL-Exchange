@@ -22,7 +22,6 @@ class Admin extends CI_Controller {
 			$data['jquery'] = '<script type="text/javascript">$(document).ready(function(){ $("#myTab a[href=#settings]").tab("show"); });</script>';
 		}
 		if ($this->form_validation->run()) {
-			echo "test";
 			$query = $this -> db -> query('SELECT password FROM `users` WHERE is_active = "2"');
 			foreach ($query->result_array() as $row) {
 				if ($row['password'] == md5($oldpassword)) {
@@ -31,10 +30,8 @@ class Admin extends CI_Controller {
 						$this -> db -> where('is_active', '2');
 						$this -> db -> update('users', $data);
 					}
-					else {
-					$error="Passwords don't match!";
-					$data['error'] = $error;
-				}
+					
+				
 				}
 				
 				

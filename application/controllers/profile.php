@@ -1,6 +1,14 @@
 <?php
 
 class Profile extends CI_Controller {
+	public function index(){
+		$uid = $this->session->userdata('user_id');
+		if(!$uid){
+			redirect("pages/home");
+		} else {
+			redirect("profile/view/$uid");
+		}
+	}
 
 	public function view($uid) {
 		$html = '';

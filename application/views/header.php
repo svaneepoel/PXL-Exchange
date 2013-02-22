@@ -104,7 +104,7 @@
 
 								<div id="user-menu" class="dropdown-menu" style="position:absolute; z-index:100; padding: 10px;">
 									<form action="<?php echo base_url(); ?>login/login_validation" method="post">
-										<?php var_dump($_SESSION); if(!isset($_SESSION['is_logged_in'])){ ?>
+										<?php if($this->session->userdata('is_logged_in') != 1){ ?>
 										<fieldset>
 											<legend>
 												Login
@@ -123,19 +123,19 @@
 											<?php } else { ?>
 												<ul>
 													<li>
-														<a href="nobtn" href="<?php echo base_url(); ?>login/logout">Log out</a>
+														<a href="<?php echo base_url(); ?>profile">Go to your profile</a>
 													</li>
 													<li>
-														<a href="nobtn" href="<?php echo base_url(); ?>profile">Go to your profile</a>
+														<a href="<?php echo base_url(); ?>login/logout">Log out</a><br/>
 													</li>
 													<li>
-														<a href="nobtn" href="<?php echo base_url(); ?>profile/edit">Edit profile</a>
+														<a href="<?php echo base_url(); ?>profile/edit">Edit profile</a>
 													</li>
 													<li>
-														<a href="nobtn" href="<?php echo base_url(); ?>profile/picture">Edit profile picture</a>
+														<a href="<?php echo base_url(); ?>profile/picture">Edit profile picture</a>
 													</li>
 													<li>
-														<a href="nobtn" href="<?php echo base_url(); ?>profile/internship">Edit internship details</a>
+														<a href="<?php echo base_url(); ?>profile/internship">Edit internship details</a>
 													</li>
 												</ul>
 											<?php } ?>

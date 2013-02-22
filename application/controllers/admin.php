@@ -6,7 +6,7 @@ class Admin extends CI_Controller {
 		$this -> load -> model('model_users');
 $this -> load -> model('model_config');
 
-		$data['abouttext'] = $this -> model_config -> get_about();
+		/*$data['abouttext'] = $this -> model_config -> get_about();*/
 		$this -> load -> library('form_validation');
 		$data['countusers'] = $this -> model_users -> get_countusers();
 		$data['countapprovedusers'] = $this -> model_users -> get_countapprovedusers();
@@ -48,14 +48,14 @@ $this -> load -> model('model_config');
 			$email = $row['email'];
 			$name = $row['vnaam'] . " " . $row['anaam'];
 		}
-		/*$this -> load -> library('email');
+		$this -> load -> library('email');
 		 $this -> email -> from('admin@phl.be', 'PXL Exchange');
 		 $this -> email -> to($email);
 		 $this -> email -> subject('PHL Exchange account approved!');
 		 $this -> email -> message('Dear '.$name . ', Your account on PXL Exchange is successfully approved!');
-		 $this -> email -> send();*/
+		 $this -> email -> send();
 
-		$this -> model_users -> set_approve($data, $id);
+		$this -> model_users -> set_approve($id);
 		redirect('admin/index');
 	}
 
@@ -67,12 +67,12 @@ $this -> load -> model('model_config');
 		}
 		$this -> model_users -> set_refuse($id);
 
-		/*$this -> load -> library('email');
+		$this -> load -> library('email');
 		 $this -> email -> from('admin@phl.be', 'PXL Exchange');
 		 $this -> email -> to($email);
 		 $this -> email -> subject('PHL Exchange account refused or deleted');
 		 $this -> email -> message('Dear '.$name . ', Your account on PXL Exchange is refused or deleted!');
-		 $this -> email -> send();*/
+		 $this -> email -> send();
 
 		redirect('admin/index');
 	}

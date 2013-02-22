@@ -188,7 +188,7 @@ Class Model_users extends CI_Model {
 		return $query -> result_array();
 	}
 
-	public function set_approve($data, $id) {
+	public function set_approve($id) {
 		$data = array('is_active' => 1);
 		$this -> db -> where('id', $id);
 		$this -> db -> update('users', $data);

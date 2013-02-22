@@ -142,7 +142,10 @@
 														<a href="<?php echo base_url(); ?>profile">Go to your profile</a>
 													</li>
 													<li>
-														<a href="<?php echo base_url(); ?>login/logout">Log out</a><br/>
+														<a href="<?php echo base_url(); ?>login/logout">Log out</a>
+													</li>
+													<li>
+														<a href="<?php echo base_url(); ?>blog/create">Add blog entry</a>
 													</li>
 													<li>
 														<a href="<?php echo base_url(); ?>profile/edit">Edit profile</a>

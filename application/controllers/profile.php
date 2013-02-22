@@ -18,10 +18,14 @@ class Profile extends CI_Controller {
 		$this -> load -> model('model_users');
 		$this -> model_users -> set_id($this -> session -> userdata('user_id'));
 
-		$posts = $this -> model_blog -> get_blogs($uid);
+		$posts = $this -> model_blog -> get_blogs($uid,5);
 
 		foreach ($posts as $row) {
-			$html .= "<h2>$row->title</h3><p>$row->content</p>";
+			$html .= "<h2>$row->title</h3><span style='font-size:9pt;'>Added on $row->create_time</span><p>$row->content</p>";
+			if($uid == $this->session->userdata('user_id')){
+				$url = base_url() . "blog/delete/$row->id/p";
+				$html .= "<a class='btn btn-small btn-danger' href='$url'>Delete post</a>";
+			}
 		}
 
 		$details = $this -> model_users -> get_user_details();

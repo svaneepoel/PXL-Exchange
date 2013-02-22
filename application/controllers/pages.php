@@ -57,12 +57,30 @@ class Pages extends CI_Controller {
 		//echo $row -> vnaam;
 
 		//END Random personen selecteren
+		// BEGIN Alle markers toevoegen vanuit de database
 		$this -> load -> library('googlemaps');
-
-		$config['center'] = '37.4419, -122.1419';
+		$config['center'] = '50.503887, 4.469936';
+		$config['zoom'] = '1';
+		$config['cluster'] = TRUE;
 		$config['map_height'] = '200px';
 		$this -> googlemaps -> initialize($config);
+		
+		
+		$query = $this -> db -> query('SELECT latitude, longitude, information FROM `points`');
+		foreach ($query->result_array() as $row) {
+			$latitude = $row['latitude'];
+			$longitude = $row['longitude'];
+			$marker = array();
+			$marker['position'] = $latitude . " , " . $longitude;
+			$marker['animation'] = 'DROP';
+			$marker['infowindow_content'] = $row['information'];
+			$this -> googlemaps -> add_marker($marker);
+		}
+		
 
+		
+		// END Alle markers toevoegen vanuit de database
+		
 		$data['map'] = $this -> googlemaps -> create_map();
 		$this -> load -> view('header', $data);
 		$this -> load -> view('home');

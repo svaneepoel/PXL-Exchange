@@ -40,15 +40,8 @@ class Pages extends CI_Controller {
 
 	public function home() {
 		$_SESSION['menukey'] = 'home';
-		
-
-		// BEGIN laatste 3 personen selecteren
-		
-		
-		
-		
-		//END laatste 3  personen selecteren
-		
+		$this -> load -> model('model_home');
+		$this -> load -> model('model_users');
 		// BEGIN Alle markers toevoegen vanuit de database
 		$this -> load -> library('googlemaps');
 		$config['center'] = '50.503887, 4.469936';
@@ -57,8 +50,7 @@ class Pages extends CI_Controller {
 		$config['map_height'] = '200px';
 		$this -> googlemaps -> initialize($config);
 
-		$query = $this -> db -> query('SELECT latitude, longitude, information FROM `points`');
-		foreach ($query->result_array() as $row) {
+		foreach ($this -> model_home ->get_points()->result_array() as $row) {
 			$latitude = $row['latitude'];
 			$longitude = $row['longitude'];
 			$marker = array();
@@ -68,9 +60,11 @@ class Pages extends CI_Controller {
 			$this -> googlemaps -> add_marker($marker);
 		}
 
-		// END Alle markers toevoegen vanuit de database
-
 		$data['map'] = $this -> googlemaps -> create_map();
+		// END Alle markers toevoegen vanuit de database
+		// BEGIN laatste 3 personen selecteren
+		$data['users'] = $this -> model_home -> get_latestusers();
+		//END laatste 3  personen selecteren
 		$this -> load -> view('header', $data);
 		$this -> load -> view('home');
 		$this -> load -> view('footer');
@@ -79,7 +73,6 @@ class Pages extends CI_Controller {
 
 	public function error_404() {
 		$html = '<div style="text-align:center;"><h1 style="font-size:36pt; font-weight:normal;">Uh oh! It\'s empty here</h1><br/><p class="lead">The requested page could not be found.</p></div>';
-
 		$this -> load -> view('header');
 		$this -> output -> append_output($html);
 		$this -> load -> view('footer');

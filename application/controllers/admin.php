@@ -3,9 +3,11 @@
 class Admin extends CI_Controller {
 
 	public function index() {
+		$this -> load -> model('model_users');
+
 		$this->load->library('form_validation');
-		$query = $this -> db -> query('SELECT id, vnaam, anaam, email, is_active FROM `users`');
-		$data['users'] = $query -> result_array();
+		
+		$data['users'] = $this -> model_users ->get_userlist();
 		$data['jquery'] = null;
 		
 		
@@ -22,31 +24,25 @@ class Admin extends CI_Controller {
 			$data['jquery'] = '<script type="text/javascript">$(document).ready(function(){ $("#myTab a[href=#settings]").tab("show"); });</script>';
 		}
 		if ($this->form_validation->run()) {
-			$query = $this -> db -> query('SELECT password FROM `users` WHERE is_active = "2"');
-			foreach ($query->result_array() as $row) {
+			
+			foreach ($this -> model_users ->get_adminpw() as $row) {
 				if ($row['password'] == md5($oldpassword)) {
 					if ($newpassword == $repeatpassword) {
 						$data = array('password' => md5($newpassword));
 						$this -> db -> where('is_active', '2');
 						$this -> db -> update('users', $data);
-					}
-					
-				
+					}			
 				}
-				
-				
-
 			}
-		}
-		
+		}	
 		$this -> load -> view('header');
 		$this -> load -> view('admin', $data);
 		$this -> load -> view('footer');
 	}
 
 	public function approve($id) {
-		$query = $this -> db -> query('SELECT vnaam, anaam, email FROM `users` WHERE id=' . $id);
-		foreach ($query->result_array() as $row) {
+		$this -> load -> model('model_users');
+		foreach ($this -> model_users ->get_approve($id) as $row) {
 			$email = $row['email'];
 			$name = $row['vnaam'] . " " . $row['anaam'];
 

@@ -3,13 +3,14 @@
 Class Model_users extends CI_Model {
 
 	private $id;
-	
+
 	/**
 	 * Sets user id so the get functions can retrieve the right information
 	 */
-	public function set_id($id){
-		$this->id = $id;
+	public function set_id($id) {
+		$this -> id = $id;
 	}
+
 	/**
 	 * Check if the entered login data was correct
 	 *
@@ -34,13 +35,7 @@ Class Model_users extends CI_Model {
 	 */
 	public function add_user() {
 		// Add records in user table
-		$data = array(
-			'anaam' => $this -> input -> post('anaam'),
-			'vnaam' => $this -> input -> post('vnaam'),
-			'email' => $this -> input -> post('email'),
-			'password' => md5($this -> input -> post('password')),
-			'is_active' => 0
-		);
+		$data = array('anaam' => $this -> input -> post('anaam'), 'vnaam' => $this -> input -> post('vnaam'), 'email' => $this -> input -> post('email'), 'password' => md5($this -> input -> post('password')), 'is_active' => 0);
 		$query = $this -> db -> insert('users', $data);
 
 		// If success return the user id, otherwise false
@@ -54,45 +49,34 @@ Class Model_users extends CI_Model {
 			return false;
 		}
 	}
-	
+
 	/**
 	 * Updates user details
 	 */
-	 public function update_user_details() {
-	 	$data = array(
-			'hobbies' => $this->input->post('hobbies'),
-			'education' => $this->input->post('education'),
-			'facebook' => $this->input->post('facebook'),
-			'twitter' => $this->input->post('twitter')
-		);
-		
-		$query = $this->db->where('user_id', $this->id)->update('user_details',$data);
-		
-		if($query)
+	public function update_user_details() {
+		$data = array('hobbies' => $this -> input -> post('hobbies'), 'education' => $this -> input -> post('education'), 'facebook' => $this -> input -> post('facebook'), 'twitter' => $this -> input -> post('twitter'));
+
+		$query = $this -> db -> where('user_id', $this -> id) -> update('user_details', $data);
+
+		if ($query)
 			return true;
 		else
 			return false;
-	 }
-	 
-	 /**
+	}
+
+	/**
 	 * Updates internship (company) details
 	 */
-	 public function update_internship_details() {
-	 	$data = array(
-			'company_name' => $this->input->post('company_name'),
-			'location' => $this->input->post('location'),
-			'latitude' => $this->input->post('latitude'),
-			'longitude' => $this->input->post('longitude'),
-			'description' => $this->input->post('description')
-		);
-		
-		$query = $this->db->where('user_id', $this->id)->update('user_internships',$data);
-		
-		if($query)
+	public function update_internship_details() {
+		$data = array('company_name' => $this -> input -> post('company_name'), 'location' => $this -> input -> post('location'), 'latitude' => $this -> input -> post('latitude'), 'longitude' => $this -> input -> post('longitude'), 'description' => $this -> input -> post('description'));
+
+		$query = $this -> db -> where('user_id', $this -> id) -> update('user_internships', $data);
+
+		if ($query)
 			return true;
 		else
 			return false;
-	 }
+	}
 
 	/**
 	 * Returns the ID which belongs to an email in the database
@@ -105,21 +89,41 @@ Class Model_users extends CI_Model {
 	 * Returns the row with user details
 	 */
 	public function get_user_details() {
-		return $this -> db -> where('user_id', $this->id) -> get('user_details') -> row();
+		return $this -> db -> where('user_id', $this -> id) -> get('user_details') -> row();
 	}
 
 	/**
 	 * Gets the row with user data
 	 */
 	public function get_user() {
-		return $this -> db -> where('id', $this->id) -> get('users') -> row();
+		return $this -> db -> where('id', $this -> id) -> get('users') -> row();
 	}
 
 	/**
 	 * Gets the row with internship info
 	 */
 	public function get_internship() {
-		return $this -> db -> where('user_id', $this->id) -> get('user_internships') -> row();
+		return $this -> db -> where('user_id', $this -> id) -> get('user_internships') -> row();
+	}
+
+	public function get_latestusers() {
+		$query = $this -> db -> query('SELECT u.id id, u.vnaam vnaam, u.anaam anaam, ud.picture picture FROM users u, user_details ud WHERE ud.user_id =u.id  ORDER BY id DESC LIMIT 3');
+		return $query -> result_array();
+	}
+	
+	public function get_userlist() {
+		$query = $this -> db -> query('SELECT id, vnaam, anaam, email, is_active FROM `users`');
+		return $query -> result_array();
+	}
+	
+	public function get_adminpw() {
+		$query = $this -> db -> query('SELECT password FROM `users` WHERE is_active = "2"');
+		return $query -> result_array();
+	}
+	
+	public function get_approve($id) {
+		$query = $this -> db -> query('SELECT vnaam, anaam, email FROM `users` WHERE id=' . $id);
+		return $query -> result_array();
 	}
 
 }

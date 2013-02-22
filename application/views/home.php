@@ -15,20 +15,14 @@
 		<hr>
 		<div class="row">
 			<div class="span12 offset1">
-
 				<?php
-				$query = $this -> db -> query('SELECT id, vnaam, anaam FROM `users` ORDER BY id DESC LIMIT 3');
-				foreach ($query->result_array() as $row) {
-					$query = $this -> db -> query('SELECT picture FROM `user_details` WHERE user_id ='.$row['id']);
-					
-					echo "<div class='span3'><div class='well'><img src='".base_url()."/uploads/".$row['picture']."'><h4>";
+				foreach ($users as $row) {
+					echo "<div class='span3'><div class='well'><img src='" . base_url() . "/uploads/" . $row['picture'] . "' height='250' width='250'><h4>";
 					echo $row['vnaam'] . " " . $row['anaam'];
-					echo "</h4><a href='#' class='btn btn-small btn-success'>More info</a></div></div>";
+					echo "</h4><a href='" . base_url() . "profile/view/" . $row['id'] . "' class='btn btn-small btn-success'>More info</a></div></div>";
 				}
 				?>
-				
-				</div>
-
-				</div>
 			</div>
+		</div>
+	</div>
 

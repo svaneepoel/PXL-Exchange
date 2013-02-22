@@ -220,5 +220,10 @@ Class Model_users extends CI_Model {
 	public function set_profilepicture($var1, $var2) {
 		$this -> db -> where('user_id', $var1) -> update('user_details', $var2);
 	}
+	
+	public function get_searchusers($search) {
+		$query = $this -> db -> query('select vnaam, anaam from users where vnaam LIKE `'.$search.'%`');
+		return $query -> result_array();
+	}
 
 }

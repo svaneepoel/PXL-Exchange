@@ -29,7 +29,7 @@ class Discover extends CI_Controller {
 			$marker['position'] = $latitude . " , " . $longitude;
 			$marker['draggable'] = TRUE;
 			$marker['animation'] = 'DROP';
-			$marker['infowindow_content'] = $row['information'];
+			$marker['infowindow_content'] = "<h3>".$row['company_name']."</h3><br/></h5>Posted by <a href=". base_url() ."profile/view/".$row['id'].">".$row['vnaam']." ".$row['anaam']."</a></h5>";
 			$this -> googlemaps -> add_marker($marker);
 		}
 		// END MARKERS

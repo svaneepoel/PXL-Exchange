@@ -40,7 +40,7 @@ class Pages extends CI_Controller {
 
 	public function home() {
 		$_SESSION['menukey'] = 'home';
-		$this -> load -> model('model_home');
+		$this -> load -> model('model_points');
 		$this -> load -> model('model_users');
 		
 		// BEGIN Alle markers toevoegen vanuit de database
@@ -51,13 +51,13 @@ class Pages extends CI_Controller {
 		$config['map_height'] = '200px';
 		$this -> googlemaps -> initialize($config);
 
-		foreach ($this -> model_home ->get_points()->result_array() as $row) {
+		foreach ($this -> model_points ->get_points() as $row) {
 			$latitude = $row['latitude'];
 			$longitude = $row['longitude'];
 			$marker = array();
 			$marker['position'] = $latitude . " , " . $longitude;
 			$marker['animation'] = 'DROP';
-			$marker['infowindow_content'] = $row['information'];
+			$marker['infowindow_content'] = "<strong>".$row['company_name']."</strong><br/>Posted by <a href=". base_url() ."profile/view/".$row['id'].">".$row['vnaam']." ".$row['anaam']."</a>";
 			$this -> googlemaps -> add_marker($marker);
 		}
 

@@ -44,7 +44,7 @@
 				echo "<td>";
 				echo "<a class='btn btn-small btn-success' href='".base_url()."admin/approve/" . $row['id'] . "'?>Approve</a>";
 				echo " ";
-				echo "<a class='btn btn-small btn-danger' href='".base_url()."admin/refuse/" . $row['id'] . "'?>Refuse</a>";
+				echo "<a class='btn btn-small btn-warning' href='".base_url()."admin/refuse/" . $row['id'] . "'?>Refuse</a>";
 				echo "</td>";
 			} else {
 				echo "<td><a class='btn btn-small btn-danger' href='".base_url()."admin/refuse/" . $row['id'] . "'?>Delete</a></td>";

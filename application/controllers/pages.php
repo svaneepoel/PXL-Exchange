@@ -40,26 +40,15 @@ class Pages extends CI_Controller {
 
 	public function home() {
 		$_SESSION['menukey'] = 'home';
-		// BEGIN Random personen selecteren
-
-		$query2 = $this -> db -> query("SELECT id FROM `users` ORDER BY id DESC LIMIT 3;");
-		foreach ($query2->result() as $row) {
-			echo $row -> id;
-		}
-		
-		$row = $query2 -> row();
-		$vnaam = $row -> id;
-		$data['person1'] = $vnaam;
-
-
-
 		
 
+		// BEGIN laatste 3 personen selecteren
 		
-
-
-
-		//END Random personen selecteren
+		
+		
+		
+		//END laatste 3  personen selecteren
+		
 		// BEGIN Alle markers toevoegen vanuit de database
 		$this -> load -> library('googlemaps');
 		$config['center'] = '50.503887, 4.469936';

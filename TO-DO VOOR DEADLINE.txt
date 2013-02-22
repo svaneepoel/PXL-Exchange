@@ -3,7 +3,6 @@
 - bij discover, zorgen dat daar de stagebedrijven komen van de gebruikers
 - Statistieken (ma k denk eig da bena niemand da heeft ze )
 - PHPDoc commentaren toevoegen (zoals bij model_users nu)
-- google analytics
 - Afwerking udpate internship page
 - Add/edit/page POI
 - Admin login

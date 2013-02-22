@@ -135,7 +135,9 @@
 											or <a href="<?php echo base_url(); ?>login/signup" class="nobtn">sign up</a> (only for exchange students).
 											<br/>
 											<hr>
-											<img class="facebook" width="220" src="<?php echo base_url(); ?>assets/img/facebook.png" alt="fb_login" />
+											<a href="<?php echo base_url();?>login/facebook">
+											<img class="facebook" src="<?php echo base_url(); ?>assets/img/facebook.png" style="width:220px;" alt="fb_login" />
+											</a>
 											<?php } else { ?>
 												<ul id="user-menu-options">
 													<li>

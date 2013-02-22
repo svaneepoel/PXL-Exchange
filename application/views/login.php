@@ -1,6 +1,4 @@
 <h1>Login</h1>
-
-			
 				<?php
 
 				echo form_open('login/login_validation', array('class'=>'form-horizontal'));
@@ -23,6 +21,8 @@
 			?>
 
 				<a href='<?php echo base_url() . "login/signup"; ?>'>Sign Up</a>
-			
+			<br/><br/>
+			If you already have an account, you can login with Facebook:<br/>
+			<a href="<?php echo base_url('login/facebook'); ?>"><img src="<?php echo base_url() . 'assets/img/facebook.png'; ?>" alt="" style="width: 200px;" /></a>
 		</div>
 	</div>

@@ -27,6 +27,20 @@ Class Model_users extends CI_Model {
 			return false;
 		}
 	}
+	
+	/**
+	 * Check if the FB email matches with an user in the database
+	 */
+	public function login_by_facebook($email) {
+		$this->db->where('email', $email);
+		$this->db->where('is_active', 1);
+		$query = $this -> db -> get('users');
+		if ($query -> num_rows() == 1) {
+			return $query -> row() -> id;
+		} else {
+			return false;
+		}
+	}
 
 	/**
 	 * Add user to database
@@ -35,7 +49,33 @@ Class Model_users extends CI_Model {
 	 */
 	public function add_user() {
 		// Add records in user table
-		$data = array('anaam' => $this -> input -> post('anaam'), 'vnaam' => $this -> input -> post('vnaam'), 'email' => $this -> input -> post('email'), 'password' => md5($this -> input -> post('password')), 'is_active' => 0);
+		$data = array(
+			'anaam' => $this -> input -> post('anaam'),
+			'vnaam' => $this -> input -> post('vnaam'),
+			'email' => $this -> input -> post('email'),
+			'password' => md5($this -> input -> post('password')),
+			'is_active' => 0
+		);
+		$query = $this -> db -> insert('users', $data);
+
+		// If success return the user id, otherwise false
+		if ($query) {
+			$id = $this -> db -> insert_id();
+			// Generate user_details and user_internships so users can change their details later
+			$this -> db -> insert('user_details', array('user_id' => $id));
+			$this -> db -> insert('user_internships', array('user_id' => $id));
+			return $id;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * Add user to database, get data from FB account
+	 *
+	 * Returns the ID is user was created succesfully
+	 */
+	public function add_user_facebook($data) {
 		$query = $this -> db -> insert('users', $data);
 
 		// If success return the user id, otherwise false
@@ -54,7 +94,12 @@ Class Model_users extends CI_Model {
 	 * Updates user details
 	 */
 	public function update_user_details() {
-		$data = array('hobbies' => $this -> input -> post('hobbies'), 'education' => $this -> input -> post('education'), 'facebook' => $this -> input -> post('facebook'), 'twitter' => $this -> input -> post('twitter'));
+		$data = array(
+			'hobbies' => $this -> input -> post('hobbies'),
+			'education' => $this -> input -> post('education'),
+			'facebook' => $this -> input -> post('facebook'),
+			'twitter' => $this -> input -> post('twitter')
+		);
 
 		$query = $this -> db -> where('user_id', $this -> id) -> update('user_details', $data);
 
@@ -68,7 +113,13 @@ Class Model_users extends CI_Model {
 	 * Updates internship (company) details
 	 */
 	public function update_internship_details() {
-		$data = array('company_name' => $this -> input -> post('company_name'), 'location' => $this -> input -> post('location'), 'latitude' => $this -> input -> post('latitude'), 'longitude' => $this -> input -> post('longitude'), 'description' => $this -> input -> post('description'));
+		$data = array(
+			'company_name' => $this -> input -> post('company_name'),
+			'location' => $this -> input -> post('location'),
+			'latitude' => $this -> input -> post('latitude'),
+			'longitude' => $this -> input -> post('longitude'),
+			'description' => $this -> input -> post('description')
+		);
 
 		$query = $this -> db -> where('user_id', $this -> id) -> update('user_internships', $data);
 
@@ -120,6 +171,7 @@ Class Model_users extends CI_Model {
 		$query = $this -> db -> query('SELECT password FROM `users` WHERE is_active = "2"');
 		return $query -> result_array();
 	}
+
 	public function set_adminpw($data) {
 		$this -> db -> where('is_active', '2');
 		$this -> db -> update('users', $data);
@@ -146,20 +198,21 @@ Class Model_users extends CI_Model {
 		$this -> db -> delete('user_details', array('user_id' => $id));
 		$this -> db -> delete('user_internships', array('user_id' => $id));
 	}
-	
+
 	public function get_countusers() {
 		return $this -> db -> count_all_results('users');
 	}
-	
+
 	public function get_countapprovedusers() {
 		$this -> db -> where('is_active', '1');
 		$this -> db -> or_where('is_active', '2');
-		
+
 		$this -> db -> from('users');
 		return $this -> db -> count_all_results();
 	}
-	
+
 	public function set_profilepicture($var1, $var2) {
 		$this -> db -> where('user_id', $var1) -> update('user_details', $var2);
 	}
+
 }

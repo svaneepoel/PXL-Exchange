@@ -1,8 +1,5 @@
-<div id="container">
-
-
 <h1> Sign Up</h1>
-
+<p>Only exchange students can sign up on our website. You will receive an email when your account has been enabled.</p>
 	<?php
 	
 		echo form_open('login/signup_validation');
@@ -33,15 +30,5 @@
 		echo form_submit('signup_submit', 'Sign Up!');
 		echo "</p>";
 		
-		echo form_close();
-	
-	
-	
-	
-	
-	
-	
-	
+		echo form_close();	
 	?>
-
-</div>

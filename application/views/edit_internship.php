@@ -43,10 +43,9 @@
 			marker.setIcon(image);
 			marker.setPosition(place.geometry.location);
 
-			// CUSTOM PARTY LOCATOR
-			document.getElementById('lat').value = place.geometry.location.Ya;
-			document.getElementById('lng').value = place.geometry.location.Za;
-			// END CUSTOM PARTY LOCATOR
+			document.getElementById('lat').value = place.geometry.location.ib;
+			document.getElementById('lng').value = place.geometry.location.hb;
+			
 
 			var address = '';
 			if (place.address_components) {

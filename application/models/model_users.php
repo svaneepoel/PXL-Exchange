@@ -112,14 +112,20 @@ Class Model_users extends CI_Model {
 	/**
 	 * Updates internship (company) details
 	 */
-	public function update_internship_details() {
+	public function update_internship_details() {		
 		$data = array(
 			'company_name' => $this -> input -> post('company_name'),
 			'location' => $this -> input -> post('location'),
-			'latitude' => $this -> input -> post('lat'),
-			'longitude' => $this -> input -> post('lng'),
 			'description' => $this -> input -> post('description')
 		);
+		
+		// Only set lat en long if there's a marker placed on Google Maps
+		$lat = $this -> input -> post('lat');
+		$lng = $this -> input -> post('lng');
+		if(!empty($lat)&&!empty($lng)){
+			$data['latitude'] = $lat;
+			$data['longitude'] = $lng;
+		}
 
 		$query = $this -> db -> where('user_id', $this -> id) -> update('user_internships', $data);
 

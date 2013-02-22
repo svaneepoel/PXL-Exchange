@@ -96,7 +96,7 @@
 							<a href="<?php echo base_url(); ?>discover" class="btn"><i class="icon icon-globe icon-large"></i>Discover</a>
 						</li>
 						<li <?php echo is_active('search'); ?>>
-							<a href="<?php echo base_url(); ?>" class="btn"><i class="icon icon-search icon-large"></i>Search</a>
+							<a href="<?php echo base_url(); ?>search" class="btn"><i class="icon icon-search icon-large"></i>Search</a>
 						</li>
 						<li <?php echo is_active('info'); ?>>
 							<a href="<?php echo base_url(); ?>pages/about" class="btn"><i class="icon icon-book-open icon-large"></i>Info</a>

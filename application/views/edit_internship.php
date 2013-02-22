@@ -1,27 +1,14 @@
-<?php echo form_open('profile/edit', array('class' => 'form-horizontal', 'method' => 'post')); ?>
+<?php echo form_open('profile/internship', array('class' => 'form-horizontal', 'method' => 'post')); ?>
 <fieldset>
 	<div id="legend" class="">
 		<legend class="">
 			Edit internship details
 		</legend>
 	</div>
-	<div class="zoeken">
-	<form class="form-search" action="" method="post">
-		<input name="test" id="myPlaceTextBox" type="text" class="input-medium search-query">
-		<button type="submit" class="btn">
-			Search
-		</button>
-	</form>
-</div>
-<script type="text/javascript">
-		var centreGot = false;
-	</script>
-	<?php echo $map['js']; ?>
-<?php echo $map['html']; ?>
 		<div class="control-group">
 		<label class="control-label">Company name</label>
 		<div class="controls">
-			<input value="<?php echo $internship_details->company_name; ?>" name="company_name" type="text">
+			<input value="<?php echo $internship_details->company_name; ?>" name="company_name" type="text" />
 			<?php echo form_error('company_name'); ?>
 		</div>
 	</div>
@@ -34,7 +21,18 @@
 			</div>
 		</div>
 	</div>
-	Google maps hier
+	<div class="control-group">
+		<label class="control-label">Location</label>
+		<div class="controls">
+			<input value="<?php echo $internship_details->location; ?>" name="location" id="myPlaceTextBox" type="text" />
+			<?php echo form_error('company_name'); ?>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var centreGot = false;
+	</script>
+	<?php echo $map['js']; ?>
+	<?php echo $map['html']; ?>
 	<div class="control-group">
 		<div class="controls">
 			<button name="submit" type="submit" class="btn btn-success">

@@ -1,3 +1,4 @@
+<?php echo $jquery; ?>
 <div style="text-align:center;">
 	<div class='input-append' style="height:50px;">
 		<div class="page-header">
@@ -19,7 +20,6 @@
 		<a href="#settings">Settings</a>
 	</li>
 </ul>
-
 <div class="tab-content">
 	<div class="tab-pane fade in active" id="approve">
 		<?php
@@ -69,6 +69,7 @@
 	<div class="tab-pane fade in" id="settings">
 
 		<form action="" method="post" class="form-horizontal">
+			<?php echo validation_errors(); ?>
 			<fieldset>
 				<div id="legend" class="">
 					<legend class="">

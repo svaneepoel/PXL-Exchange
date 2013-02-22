@@ -3,13 +3,26 @@
 class Admin extends CI_Controller {
 
 	public function index() {
+		$this->load->library('form_validation');
 		$query = $this -> db -> query('SELECT id, vnaam, anaam, email, is_active FROM `users`');
 		$data['users'] = $query -> result_array();
+		$data['jquery'] = null;
+		
+		
+		$this -> form_validation -> set_rules('oldpassword', 'Old password', 'required');
+		$this -> form_validation -> set_rules('newpassword', 'New password', 'required');
+		$this -> form_validation -> set_rules('repeatpassword', 'Repeat password', 'required');
+		$this -> form_validation -> set_error_delimiters('<div class="label label-important">', '</div>');
 
 		$oldpassword = $this -> input -> post("oldpassword");
 		$newpassword = $this -> input -> post("newpassword");
 		$repeatpassword = $this -> input -> post("repeatpassword");
-		if (isset($oldpassword) && isset($newpassword) && isset($repeatpassword)) {
+
+		if($oldpassword !== false){
+			$data['jquery'] = '<script type="text/javascript">$(document).ready(function(){ $("#myTab a[href=#settings]").tab("show"); });</script>';
+		}
+		if ($this->form_validation->run()) {
+			echo "test";
 			$query = $this -> db -> query('SELECT password FROM `users` WHERE is_active = "2"');
 			foreach ($query->result_array() as $row) {
 				if ($row['password'] == md5($oldpassword)) {

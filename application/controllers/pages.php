@@ -42,6 +42,7 @@ class Pages extends CI_Controller {
 		$_SESSION['menukey'] = 'home';
 		$this -> load -> model('model_home');
 		$this -> load -> model('model_users');
+		
 		// BEGIN Alle markers toevoegen vanuit de database
 		$this -> load -> library('googlemaps');
 		$config['center'] = '50.503887, 4.469936';
@@ -62,6 +63,7 @@ class Pages extends CI_Controller {
 
 		$data['map'] = $this -> googlemaps -> create_map();
 		// END Alle markers toevoegen vanuit de database
+		
 		// BEGIN laatste 3 personen selecteren
 		$data['users'] = $this -> model_users -> get_latestusers();
 		//END laatste 3  personen selecteren

@@ -42,10 +42,12 @@
 			echo "</td>";
 			if ($row['is_active'] == 0) {
 				echo "<td>";
-				echo "<a class='btn btn-small btn-warning' href='".base_url()."admin/approve/" . $row['id'] . "'?>Approve!</a>";
+				echo "<a class='btn btn-small btn-success' href='".base_url()."admin/approve/" . $row['id'] . "'?>Approve</a>";
+				echo " ";
+				echo "<a class='btn btn-small btn-danger' href='".base_url()."admin/refuse/" . $row['id'] . "'?>Refuse</a>";
 				echo "</td>";
 			} else {
-				echo "<td>Reeds toegevoegd</td>";
+				echo "<td><a class='btn btn-small btn-danger' href='".base_url()."admin/refuse/" . $row['id'] . "'?>Delete</a></td>";
 			}
 			echo "</tr>";
 		}
@@ -118,7 +120,14 @@
 		e.preventDefault();
 		$(this).tab('show');
 	})
-	$('#myTab a:last').tab('show');
-	$('#myTab a:first').tab('show'); 
+	/*$('#myTab a:last').tab('show');
+	$('#myTab a:first').tab('show'); */
 </script>
+<?php
+		if (isset($error)){
+			
+			echo $error;
+		}
+		
+		?>
 

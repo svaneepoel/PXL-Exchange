@@ -162,6 +162,9 @@ Class Model_users extends CI_Model {
 	public function get_internship() {
 		return $this -> db -> where('user_id', $this -> id) -> get('user_internships') -> row();
 	}
+	/**
+	 * Get latest accepted users
+	 */
 
 	public function get_latestusers() {
 		$query = $this -> db -> query('SELECT u.id id, u.vnaam vnaam, u.anaam anaam, ud.picture picture FROM users u, user_details ud WHERE ud.user_id =u.id AND u.is_active = 1  ORDER BY id DESC LIMIT 3');

@@ -158,4 +158,8 @@ Class Model_users extends CI_Model {
 		$this -> db -> from('users');
 		return $this -> db -> count_all_results();
 	}
+	
+	public function set_profilepicture($var1, $var2) {
+		$this -> db -> where('user_id', $var1) -> update('user_details', $var2);
+	}
 }

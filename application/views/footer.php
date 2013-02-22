@@ -4,5 +4,9 @@
 ?>
 
 </div>
+<div class="container">
+<div class="well clearfix" style="background:white; margin-top:0px;">
+	Copyright 2013
+</div></div>
 </body>
 </html>

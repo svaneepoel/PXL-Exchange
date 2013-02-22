@@ -11,7 +11,7 @@
 <div style="text-align:center">
 	<div class="well clearfix" style="background:white; margin-top:0px;">
 
-		<h2>Most active persons on our site!</h2>
+		<h2>Latest registered persons on our site!</h2>
 		<hr>
 		<div class="row">
 			<div class="span12 offset1">

@@ -90,6 +90,7 @@ class Profile extends CI_Controller {
 	}
 
 	public function picture() {
+		$this -> load -> model('model_users');
 		$config['upload_path'] = './uploads/';
 		$config['allowed_types'] = 'gif|jpg|png';
 		$config['max_size'] = '2048';
@@ -109,7 +110,11 @@ class Profile extends CI_Controller {
 				// Melding weergeven en profielpagina toevoegen in DB
 				$this -> output -> append_output('<div class="alert alert-success">Your profile picture has been edited.</div>');
 				$data = $this -> upload -> data();
-				$this -> db -> where('user_id', $this -> session -> userdata('user_id')) -> update('user_details', array('picture' => $data['file_name']));
+				
+				$var1 = $this -> session -> userdata('user_id');
+				$var2 = array('picture' => $data['file_name']);
+				$this -> model_users ->set_profilepicture($var1,$var2);
+				
 			}
 		}
 		$this -> load -> view('edit_profile_picture');

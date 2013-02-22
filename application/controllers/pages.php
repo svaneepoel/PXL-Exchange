@@ -81,4 +81,11 @@ class Pages extends CI_Controller {
 		$this -> load -> view('footer');
 	}
 
+	public function error_restricted() {
+		$html = '<div style="text-align:center;"><h1 style="font-size:36pt; font-weight:normal;">Uh oh! Access denied</h1><br/><p class="lead">You\'re not allowed to access this page.</p></div>';
+		$this -> load -> view('header');
+		$this -> output -> append_output($html);
+		$this -> load -> view('footer');
+	}
+
 }

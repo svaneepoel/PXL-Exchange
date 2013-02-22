@@ -7,6 +7,10 @@ class Blog extends CI_Controller {
 	}
 	
 	public function create(){
+		if($this->session->userdata('is_logged_in')!=1){
+			redirect('pages/error_restricted');
+		}
+		
 		$this->load->library('form_validation');
 		$this->load->model('model_blog');
 		

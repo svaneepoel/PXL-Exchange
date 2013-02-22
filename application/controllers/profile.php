@@ -16,7 +16,7 @@ class Profile extends CI_Controller {
 		// Alle blogposts krijgen
 		$this -> load -> model('model_blog');
 		$this -> load -> model('model_users');
-		$this -> model_users -> set_id($this -> session -> userdata('user_id'));
+		$this -> model_users -> set_id($uid);
 
 		$posts = $this -> model_blog -> get_blogs($uid,5);
 
